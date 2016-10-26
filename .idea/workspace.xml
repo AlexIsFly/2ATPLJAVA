@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9de6d59f-5db9-4fe2-9f96-abac7566e94e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/robot/Robots.java" afterPath="$PROJECT_DIR$/robot/Robots.java" />
-    </list>
+    <list default="true" id="9de6d59f-5db9-4fe2-9f96-abac7566e94e" name="Default" comment="" />
     <ignored path="2ATPLJAVA.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -66,8 +64,8 @@
       <file leaf-file-name="Robots.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/robot/Robots.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="22" column="69" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="69" />
+            <state relative-caret-position="254">
+              <caret line="28" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#291#292#0" expanded="true" />
@@ -586,8 +584,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robot/Robots.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="22" column="69" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="69" />
+        <state relative-caret-position="254">
+          <caret line="28" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#291#292#0" expanded="true" />
