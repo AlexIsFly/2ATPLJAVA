@@ -14,6 +14,8 @@ public class TestLecteurDonnees {
 
         try {
             LecteurDonnees.lire(args[0]);
+            System.out.printf("Done now printing map");
+
         } catch (FileNotFoundException e) {
             System.out.println("fichier " + args[0] + " inconnu ou illisible");
         } catch (DataFormatException e) {
