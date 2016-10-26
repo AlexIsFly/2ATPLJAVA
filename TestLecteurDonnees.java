@@ -1,4 +1,5 @@
 
+import io.DonneesSimulation;
 import io.LecteurDonnees;
 
 import java.io.FileNotFoundException;
@@ -7,13 +8,15 @@ import java.util.zip.DataFormatException;
 public class TestLecteurDonnees {
 
     public static void main(String[] args) {
+
         if (args.length < 1) {
             System.out.println("Syntaxe: java TestLecteurDonnees <nomDeFichier>");
             System.exit(1);
         }
 
         try {
-            LecteurDonnees.lire(args[0]);
+            DonneesSimulation datasim = LecteurDonnees.lire(args[0]);
+            datasim.printMap();
             System.out.printf("Done now printing map");
 
         } catch (FileNotFoundException e) {

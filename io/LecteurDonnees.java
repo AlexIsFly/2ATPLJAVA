@@ -40,17 +40,21 @@ public class LecteurDonnees {
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static void lire(String fichierDonnees)
+    public static DonneesSimulation lire(String fichierDonnees)
         throws FileNotFoundException, DataFormatException {
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
-        Carte map;
-        map = lecteur.lireCarte();
-        map.printMap();
+        Carte map = lecteur.lireCarte();
         lecteur.lireIncendies();
         lecteur.lireRobots();
+        /* creation of the DonneesSimulation instance
+         * we'll pass to the contructor an instance of each class :
+         * Carte + Incendie + Robots
+         */
+        DonneesSimulation datasim = new DonneesSimulation(map);
         scanner.close();
         System.out.println("\n == Lecture terminee");
+        return (datasim);
     }
 
 
