@@ -24,6 +24,8 @@ public class Case {
         this.terrain = NatureTerrain.EAU;
     }
 
+    //usage : case.equalsTerrain('EAU') renvoie true si case est de type EAU
+    //les types de terrain sont dans enumdata->NatureTerrain
     public boolean equalsTerrain(String str) {
         return (this.terrain == NatureTerrain.valueOf(str));
     }
