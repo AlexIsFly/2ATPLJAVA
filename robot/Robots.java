@@ -5,6 +5,7 @@ import enumdata.NatureTerrain;
 
 /**
  * Created by alexisgacel on 26/10/2016.
+ * For Project Java ISSC - IMAG 2016
  */
 public class Robots {
 
@@ -37,7 +38,7 @@ public class Robots {
     void remplirReservoir() {
 
         // Ça marche pas le double égal mais je sais pas comment faire pour l'instant
-        if (this.caseRobot.getTerrain() == "EAU") {
+        if (this.caseRobot.equalsTerrain("EAU")) {
             this.reservoir = capaciteMaxReservoir;
         }
         else {
