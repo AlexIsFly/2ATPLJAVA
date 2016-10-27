@@ -20,6 +20,10 @@ public class Carte {
         this.map = new Case[nbLignes][nbColonnes];
     }
 
+    public Case[][] getMap() {
+        return map;
+    }
+
     public int getTailleCases() {
         return tailleCases;
     }

@@ -30,15 +30,15 @@ public class Case {
         return (this.terrain == NatureTerrain.valueOf(str));
     }
 
-    int getLigne() {
+    public int getLigne() {
         return ligne;
     }
 
-    int getColonne() {
+    public int getColonne() {
         return colonne;
     }
 
-    NatureTerrain getTerrain() {
+    public NatureTerrain getTerrain() {
         return terrain;
     }
 }
