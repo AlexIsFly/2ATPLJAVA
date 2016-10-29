@@ -4,11 +4,12 @@ import carte.Carte;
 
 /**
  * Created by alexisgacel on 26/10/2016.
+ * For Project Java ISSC - IMAG 2016
  */
 public class DonneesSimulation {
     private Carte carte;
     /*
-    please add the others instance of Robots+Incendies as attributes
+    please add the others instance of Robots as attributes
     and add it to the constructor below
     */
     public DonneesSimulation(Carte map) {
@@ -20,6 +21,6 @@ public class DonneesSimulation {
     }
 
     public Carte getCarte() {
-        return carte;
+        return this.carte;
     }
 }

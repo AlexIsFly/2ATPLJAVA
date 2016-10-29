@@ -11,24 +11,25 @@ public class Case {
     private int ligne;
     private int colonne;
     private NatureTerrain terrain;
+    private boolean incendie;
+    private int qteEau;
 
     Case(int ligne, int colonne, NatureTerrain terrain) {
         this.ligne = ligne;
         this.colonne = colonne;
         this.terrain = terrain;
+        this.incendie = false;
+        this.qteEau = 0;
     }
 
     public Case() {
         this.ligne = 0;
         this.colonne = 0;
         this.terrain = NatureTerrain.EAU;
+        this.incendie = false;
+        this.qteEau = 0;
     }
 
-    //usage : case.equalsTerrain('EAU') renvoie true si case est de type EAU
-    //les types de terrain sont dans enumdata->NatureTerrain
-    public boolean equalsTerrain(String str) {
-        return (this.terrain == NatureTerrain.valueOf(str));
-    }
 
     public int getLigne() {
         return ligne;
@@ -41,5 +42,28 @@ public class Case {
     public NatureTerrain getTerrain() {
         return terrain;
     }
+
+    public boolean isIncendie() {
+        return incendie;
+    }
+
+    void setIncendie(boolean incendie) {
+        this.incendie = incendie;
+    }
+
+    void setQteEau(int qteEau) {
+        this.qteEau = qteEau;
+    }
+
+    public int getQteEau() {
+        return qteEau;
+    }
+
+    //usage : case.equalsTerrain('EAU') renvoie true si case est de type EAU
+    //les types de terrain sont dans enumdata->NatureTerrain
+    public boolean equalsTerrain(String str) {
+        return (this.terrain == NatureTerrain.valueOf(str));
+    }
+
 }
 

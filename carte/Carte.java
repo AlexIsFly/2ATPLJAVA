@@ -36,10 +36,6 @@ public class Carte {
         return nbColonnes;
     }
 
-    public Case getCase(int lig, int col) {
-        return map[lig][col];
-    }
-
     private boolean voisinExiste(Case depart, Direction dir) {
         boolean existe = true;
         switch (dir){
@@ -93,6 +89,15 @@ public class Carte {
         return depart;
     }
 
+    public boolean existeIncendie (int lig, int col) {
+        return this.map[lig][col].isIncendie();
+    }
+
+    public void setIncendie(int lig, int col, int intensite) {
+        this.map[lig][col].setIncendie(true);
+        this.map[lig][col].setQteEau(intensite);
+    }
+
     public void fillCase(int ligne, int colonne, NatureTerrain terrain) {
         this.map[ligne][colonne] = new Case(ligne, colonne, terrain);
     }
@@ -110,4 +115,5 @@ public class Carte {
             System.out.println(lig);
         }
     }
+
 }

@@ -57,14 +57,10 @@ class TerrainMap implements Simulable {
     private Iterator<Integer> yIterator;
 
 
-    public TerrainMap(GUISimulator gui, DonneesSimulation datasim) throws IOException {
+    TerrainMap(GUISimulator gui, DonneesSimulation datasim) throws IOException {
         this.gui = gui;
         gui.setSimulable(this);// association a la gui!
-        for (Case[] caselig : datasim.getCarte().getMap()) {
-            for (Case onecase : caselig) {
-                drawCase(onecase);
-            }
-        }
+        draw(datasim);
     }
 
     /**
@@ -73,38 +69,35 @@ class TerrainMap implements Simulable {
 
     @Override
     public void next() {
-        if (this.xIterator.hasNext())
-            this.x = this.xIterator.next();
-        if (this.yIterator.hasNext())
-            this.y = this.yIterator.next();
-        draw();
     }
 
     @Override
     public void restart() {
-        draw();
     }
 
 
     /**
      * Dessine l'invader.
      */
-    private void draw() {
+    private void draw(DonneesSimulation datasim) {
         gui.reset();	// clear the window
-
-        gui.addGraphicalElement(new ImageElement(0,0,"sprites/water.gif",64,64,null));
-
-        gui.addGraphicalElement(new ImageElement(164,200,"sprites/rock.png",64,64,null));
-
-        gui.addGraphicalElement(new ImageElement(228,200,"sprites/grass.png",64,64,null));
-        gui.addGraphicalElement(new ImageElement(228+5,200+5,"sprites/house.png",54,54,null));
-
-        gui.addGraphicalElement(new ImageElement(164+64+64,200,"sprites/grass.png",64,64,null));
-
-        gui.addGraphicalElement(new ImageElement(164+64+64+64,200,"sprites/forest.png",64,64,null));
+        for (Case[] caselig : datasim.getCarte().getMap()) {
+            for (Case onecase : caselig) {
+                drawCaseTerrain(onecase);
+                if (onecase.isIncendie()) {
+                    drawCaseIncendie(onecase);
+                }
+            }
+        }
     }
 
-    private void drawCase(Case gcase) {
+    private void drawCaseIncendie(Case gcase) {
+        x = gcase.getColonne()*64;
+        y = gcase.getLigne()*64;
+        gui.addGraphicalElement(new ImageElement(x+8,y+8,"sprites/fire.png",48,48,null));
+    }
+
+    private void drawCaseTerrain(Case gcase) {
         x = gcase.getColonne()*64;
         y = gcase.getLigne()*64;
         switch (gcase.getTerrain()) {

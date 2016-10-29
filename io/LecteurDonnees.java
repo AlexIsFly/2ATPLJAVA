@@ -45,7 +45,7 @@ public class LecteurDonnees {
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
         Carte map = lecteur.lireCarte();
-        lecteur.lireIncendies();
+        lecteur.lireIncendies(map);
         lecteur.lireRobots();
         /* creation of the DonneesSimulation instance
          * we'll pass to the contructor an instance of each class :
@@ -114,7 +114,7 @@ public class LecteurDonnees {
     private void lireCase(int lig, int col, Carte map) throws DataFormatException {
         ignorerCommentaires();
         System.out.print("Case (" + lig + "," + col + "): ");
-        String chaineNature = new String();
+        String chaineNature;
         NatureTerrain nature;
 
         try {
@@ -132,7 +132,6 @@ public class LecteurDonnees {
             throw new DataFormatException("format de case invalide. "
                     + "Attendu: nature altitude [valeur_specifique]");
         }
-
         System.out.println();
     }
 
@@ -140,13 +139,13 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees des incendies.
      */
-    private void lireIncendies() throws DataFormatException {
+    private void lireIncendies(Carte map) throws DataFormatException {
         ignorerCommentaires();
         try {
             int nbIncendies = scanner.nextInt();
             System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
-                lireIncendie(i);
+                lireIncendie(i, map);
             }
 
         } catch (NoSuchElementException e) {
@@ -160,7 +159,7 @@ public class LecteurDonnees {
      * Lit et affiche les donnees du i-eme incendie.
      * @param i
      */
-    private void lireIncendie(int i) throws DataFormatException {
+    private void lireIncendie(int i, Carte map) throws DataFormatException {
         ignorerCommentaires();
         System.out.print("Incendie " + i + ": ");
 
@@ -173,6 +172,7 @@ public class LecteurDonnees {
                         + "nb litres pour eteindre doit etre > 0");
             }
             verifieLigneTerminee();
+            map.setIncendie(lig,col,intensite);
 
             System.out.println("position = (" + lig + "," + col
                     + ");\t intensite = " + intensite);
