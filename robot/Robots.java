@@ -9,17 +9,43 @@ import enumdata.NatureTerrain;
  */
 public class Robots {
 
-    private Case caseRobot;
-    private int reservoir;
-    private int capaciteMaxReservoir;
-    private double vitesse;
+    protected Case caseRobot;
+    protected int reservoir;
+    protected int capaciteMaxReservoir;
+    protected double vitesse;
+
+    //constructeur
+    public Robots(Case caseRobot, int capaciteMaxReservoir, double vitesse) {
+        this.caseRobot = caseRobot;
+        this.capaciteMaxReservoir = capaciteMaxReservoir;
+        this.reservoir = capaciteMaxReservoir;
+        this.vitesse = vitesse;
+    }
+
+    //constructeur lorsque la vitesse n'est pas scécifié dans le fichier
+    public Robots(Case caseRobot, int capaciteMaxReservoir) {
+        this.caseRobot = caseRobot;
+        this.capaciteMaxReservoir = capaciteMaxReservoir;
+        this.reservoir = capaciteMaxReservoir;
+    }
+
+    //constructeur par défaut
+    public Robots() {
+        //constructeur par défaut de Case (coord (0,0), type EAU, pas d'incendie)
+        this.caseRobot = new Case();
+        this.reservoir = 0;
+        this.capaciteMaxReservoir = 0;
+        this.vitesse = 0;
+    }
 
     public Case getPosition() {
         return this.caseRobot;
     }
+
     public void setPosition(Case caseUser) {
         this.caseRobot = caseUser;
     }
+
     public double getVitesse(NatureTerrain ntUser) {
         // Pas du tout complète il faut regarder la nature du terrain
         return this.vitesse;
