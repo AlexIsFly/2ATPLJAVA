@@ -21,7 +21,8 @@ public class EvenementMoveDir extends Evenement {
 
         switch (dir) {
             case NORD:
-
+                //robot direction to move North
+                //how to access relevant robot from here ?!
                 break;
             case SUD:
                 break;
