@@ -28,7 +28,6 @@ public class Robots {
         this.caseRobot = new Case();
         this.reservoir = 0;
         this.capaciteMaxReservoir = 0;
-        this.vitesse = new Vitesse(0);
     }
 
     public Case getPosition() {

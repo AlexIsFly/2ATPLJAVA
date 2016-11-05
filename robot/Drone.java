@@ -27,4 +27,10 @@ class Drone extends Robots {
         this.vitesse = new Vitesse(100);
     }
 
+    // Constructeur par défaut
+    public Drone() {
+        super();
+        this.vitesse = new Vitesse(100);
+    }
+
 }

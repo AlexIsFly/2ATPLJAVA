@@ -75,4 +75,12 @@ public class Vitesse {
     public void setVitesseHabitat(double vitesseHabitat) {
         this.vitesseHabitat = vitesseHabitat;
     }
+
+    public void setAllVitesses(double vitesse) {
+        this.vitesseEau = vitesse;
+        this.vitesseForet = vitesse;
+        this.vitesseRoche = vitesse;
+        this.vitesseHabitat = vitesse;
+        this.vitesseTerrainLibre = vitesse;
+    }
 }
