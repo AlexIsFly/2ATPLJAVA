@@ -22,13 +22,6 @@ public class Robots {
         this.vitesse = vitesse;
     }
 
-    //constructeur lorsque la vitesse n'est pas spécifiée dans le fichier, ie on met les valeurs données dans le sujet
-    public Robots(Case caseRobot, int capaciteMaxReservoir) {
-        this.caseRobot = caseRobot;
-        this.capaciteMaxReservoir = capaciteMaxReservoir;
-        this.reservoir = capaciteMaxReservoir;
-    }
-
     //constructeur par défaut
     public Robots() {
         //constructeur par défaut de Case (coord (0,0), type EAU, pas d'incendie)
@@ -59,7 +52,7 @@ public class Robots {
         if (NatureTerrain.valueOf("HABITAT") == ntUser) {
             return this.vitesse.getVitesseHabitat();
         }
-        return this.vitesse.getVitesse();
+        return 0;
     }
     void deverserEau(int volume)  {
         // Décrémenter le volume du robot mais aussi décrémenter l'incendie : attendre DORR
