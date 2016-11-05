@@ -1,6 +1,5 @@
 package evenement;
 
-import enumdata.Action;
 import enumdata.Direction;
 
 /**

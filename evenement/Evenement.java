@@ -1,7 +1,5 @@
 package evenement;
 
-import enumdata.Action;
-
 /**
  * Created by alexisgacel on 30/10/2016.
  * For Project Java ISSC - IMAG 2016
