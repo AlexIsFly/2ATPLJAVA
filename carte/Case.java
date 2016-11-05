@@ -65,5 +65,10 @@ public class Case {
         return (this.terrain == NatureTerrain.valueOf(str));
     }
 
+    public String getCoord() {
+        String str = "("+this.colonne+","+this.ligne+")";
+        return str;
+    }
+
 }
 
