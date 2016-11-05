@@ -17,7 +17,7 @@ public class EvenementMoveDir extends Evenement {
 
     public void execute(){
         super.execute();
-        System.out.printf(" | MoveDirection : "+dir);
+        System.out.println(" | MoveDirection : "+dir);
 
         switch (dir) {
             case NORD:

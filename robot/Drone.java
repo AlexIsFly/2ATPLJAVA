@@ -13,7 +13,6 @@ class Drone extends Robots {
 
         // Je suis obligé de faire cette chose laborieuse car l'appel à super doit être la première instruction..
         if (vitesseTerrainLibre > 150) {
-            vitesseTerrainLibre = 150;
             this.vitesse.setVitesseTerrainLibre(150);
             this.vitesse.setVitesseEau(150);
             this.vitesse.setVitesseForet(150);
