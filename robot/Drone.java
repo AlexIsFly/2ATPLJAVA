@@ -8,29 +8,22 @@ import carte.Case;
 class Drone extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
-    public Drone (Case caseRobot, int capaciteMaxReservoir, double vitesseTerrainLibre) {
-        super(caseRobot, capaciteMaxReservoir, new Vitesse(vitesseTerrainLibre));
-
-        // Je suis obligé de faire cette chose laborieuse car l'appel à super doit être la première instruction..
-        if (vitesseTerrainLibre > 150) {
-            this.vitesse.setVitesseTerrainLibre(150);
-            this.vitesse.setVitesseEau(150);
-            this.vitesse.setVitesseForet(150);
-            this.vitesse.setVitesseRoche(150);
-            this.vitesse.setVitesseHabitat(150);
-        }
+    public Drone (Case caseRobot, double vitesseTerrainLibre) {
+        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(vitesseTerrainLibre));
     }
 
     // Quand la vitesse n'est pas spécifiée
-    public Drone(Case caseRobot, int capaciteMaxReservoir) {
-        super(caseRobot, capaciteMaxReservoir);
+    public Drone(Case caseRobot) {
+        super(caseRobot);
         this.vitesse = new Vitesse(100);
+        this.reservoir = new Reservoir(100000, 1800, 10000, 30);
     }
 
     // Constructeur par défaut
     public Drone() {
         super();
         this.vitesse = new Vitesse(100);
+        this.reservoir = new Reservoir(100000, 1800, 10000, 30);
     }
 
 }
