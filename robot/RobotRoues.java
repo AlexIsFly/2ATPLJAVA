@@ -7,7 +7,7 @@ import enumdata.Direction;
 /**
  * Created by Nicolas on 05/11/2016.
  */
-class RobotRoues extends Robots {
+public class RobotRoues extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
     public RobotRoues (Case caseRobot, Reservoir reservoir, double vitesseTerrainLibre) {
@@ -15,7 +15,7 @@ class RobotRoues extends Robots {
     }
 
     // Quand la vitesse n'est pas spécifiée
-    public RobotRoues(Case caseRobot, int capaciteMaxReservoir) {
+    public RobotRoues(Case caseRobot) {
         super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(80, 0, 0, 0, 80));
     }
 

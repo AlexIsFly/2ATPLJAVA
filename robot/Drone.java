@@ -5,7 +5,7 @@ import carte.Case;
 /**
  * Created by Nicolas on 05/11/2016.
  */
-class Drone extends Robots {
+public class Drone extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
     public Drone (Case caseRobot, double vitesseTerrainLibre) {

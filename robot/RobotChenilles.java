@@ -7,7 +7,7 @@ import enumdata.Direction;
 /**
  * Created by Nicolas on 05/11/2016.
  */
-class RobotChenilles extends Robots {
+public class RobotChenilles extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
     public RobotChenilles (Case caseRobot, double vitesseTerrainLibre) {

@@ -5,7 +5,7 @@ import carte.Case;
 /**
  * Created by Nicolas on 05/11/2016.
  */
-class RobotPattes extends Robots {
+public class RobotPattes extends Robots {
     // La vitesse n'est jamais spécifiée pour robot à pattes
     // Je considère le volume d'eau infini en le mettant très grand
     public RobotPattes(Case caseRobot) {

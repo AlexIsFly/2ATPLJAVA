@@ -1,5 +1,6 @@
 import enumdata.Direction;
 import evenement.Evenement;
+import evenement.EvenementMoveCoord;
 import evenement.EvenementMoveDir;
 
 /**
@@ -13,5 +14,8 @@ public class TestEvenement {
 
         Evenement event2 = new EvenementMoveDir(1, Direction.EST);
         event2.execute();
+
+        Evenement event3 = new EvenementMoveCoord(2,5,4);
+        event3.execute();
     }
 }
