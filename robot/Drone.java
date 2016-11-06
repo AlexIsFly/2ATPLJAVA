@@ -14,9 +14,7 @@ class Drone extends Robots {
 
     // Quand la vitesse n'est pas spécifiée
     public Drone(Case caseRobot) {
-        super(caseRobot);
-        this.vitesse = new Vitesse(100);
-        this.reservoir = new Reservoir(100000, 1800, 10000, 30);
+        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(100));
     }
 
     // Constructeur par défaut

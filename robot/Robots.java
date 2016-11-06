@@ -40,7 +40,7 @@ public class Robots {
 
     public double getVitesse(NatureTerrain ntUser) {
         if (NatureTerrain.valueOf("TERRAIN_LIBRE") == ntUser) {
-            return this.vitesse.getVitesseForet();
+            return this.vitesse.getVitesseTerrainLibre();
         }
         if (NatureTerrain.valueOf("FORET") == ntUser) {
             return this.vitesse.getVitesseForet();
@@ -76,6 +76,7 @@ public class Robots {
 
         System.out.println("Temps pour verser eau : " + temps);
     }
+
     void remplirReservoir() {
         // On fait en fonction des robots : pour savoir le type de robot qu'on traite on regarde le reservoir.getTempsIntervention() qui est différent en fonction des robots
 
