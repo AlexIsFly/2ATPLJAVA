@@ -24,6 +24,10 @@ public class Carte {
         return map;
     }
 
+    public Case getCase(int lig, int col) {
+        return this.map[lig][col];
+    }
+
     public int getTailleCases() {
         return tailleCases;
     }
