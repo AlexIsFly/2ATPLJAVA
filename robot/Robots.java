@@ -77,10 +77,12 @@ public class Robots {
         System.out.println("Temps pour verser eau : " + temps);
     }
 
-    void remplirReservoir() {
+ /*   void remplirReservoir() {
         // On fait en fonction des robots : pour savoir le type de robot qu'on traite on regarde le reservoir.getTempsIntervention() qui est différent en fonction des robots
 
         // Robot Drone
+
+
         if (this.reservoir.getTempsIntervention() == 30) {
             if (this.caseRobot.equalsTerrain("EAU")) {
                 this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
@@ -99,9 +101,13 @@ public class Robots {
                 // On est à côté de l'eau on peut remplir
                 this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
             }
+
         }
         else {
             System.out.println("Le robot ne peut pas remplir son réservoir !");
         }
-    }
+
+
+
+    } */
 }

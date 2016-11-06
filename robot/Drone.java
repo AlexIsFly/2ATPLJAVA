@@ -24,4 +24,9 @@ class Drone extends Robots {
         this.reservoir = new Reservoir(100000, 1800, 10000, 30);
     }
 
+    public void remplirReservoir() {
+        if (this.caseRobot.equalsTerrain("EAU")) {
+            this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
+        }
+    }
 }

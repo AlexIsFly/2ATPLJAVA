@@ -9,9 +9,7 @@ class RobotPattes extends Robots {
     // La vitesse n'est jamais spécifiée pour robot à pattes
     // Je considère le volume d'eau infini en le mettant très grand
     public RobotPattes(Case caseRobot) {
-        super(caseRobot);
-        this.vitesse = new Vitesse(30, 30, 0, 10, 30);
-        this.reservoir = new Reservoir(1000000000, 0, 10, 1);
+        super(caseRobot, new Reservoir(1000000000, 0, 10, 1), new Vitesse(30, 30, 0, 10, 30));
     }
 
     // Constructeur par défaut

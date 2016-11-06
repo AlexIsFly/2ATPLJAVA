@@ -29,26 +29,42 @@ public class Reservoir {
     }
 
     public int getCapaciteReservoir() {
-        return this.capaciteReservoir;
+        return capaciteReservoir;
     }
 
-    public int getTempsIntervention() {
-        return this.tempsIntervention;
+    public void setCapaciteReservoir(int capaciteReservoir) {
+        this.capaciteReservoir = capaciteReservoir;
     }
 
     public int getTempsRemplissage() {
-        return this.tempsRemplissage;
+        return tempsRemplissage;
     }
 
-    public int getVolumeCourant() {
-        return this.volumeCourant;
+    public void setTempsRemplissage(int tempsRemplissage) {
+        this.tempsRemplissage = tempsRemplissage;
     }
 
     public int getVolumeIntervention() {
-        return this.volumeIntervention;
+        return volumeIntervention;
     }
 
-    public void setVolumeCourant(int newVolumeCourant) {
-        this.volumeCourant = newVolumeCourant;
+    public void setVolumeIntervention(int volumeIntervention) {
+        this.volumeIntervention = volumeIntervention;
+    }
+
+    public int getTempsIntervention() {
+        return tempsIntervention;
+    }
+
+    public void setTempsIntervention(int tempsIntervention) {
+        this.tempsIntervention = tempsIntervention;
+    }
+
+    public int getVolumeCourant() {
+        return volumeCourant;
+    }
+
+    public void setVolumeCourant(int volumeCourant) {
+        this.volumeCourant = volumeCourant;
     }
 }
