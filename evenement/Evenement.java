@@ -5,7 +5,7 @@ package evenement;
  * For Project Java ISSC - IMAG 2016
  */
 public class Evenement {
-    protected int date;
+    private int date;
 
     public Evenement(int date) {
         this.date = date;
