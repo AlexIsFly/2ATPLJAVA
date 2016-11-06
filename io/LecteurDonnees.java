@@ -3,6 +3,8 @@ package io;
 
 import carte.Carte;
 import enumdata.NatureTerrain;
+import robot.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.zip.DataFormatException;
@@ -44,14 +46,16 @@ public class LecteurDonnees {
         throws FileNotFoundException, DataFormatException {
         System.out.println("\n == Lecture du fichier" + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
+
+        //creation + remplissage de l'instance Carte
         Carte map = lecteur.lireCarte();
         lecteur.lireIncendies(map);
-        lecteur.lireRobots();
-        /* creation of the DonneesSimulation instance
-         * we'll pass to the contructor an instance of each class :
-         * Carte + Incendie + Robots
-         */
-        DonneesSimulation datasim = new DonneesSimulation(map);
+
+        //creation + remplissage de l'instance liste de Robots
+        Robots[] robotL = lecteur.lireRobots(map);
+
+        //construction de l'instance de DonneesSimulation
+        DonneesSimulation datasim = new DonneesSimulation(map, robotL);
         scanner.close();
         System.out.println("\n == Lecture terminee");
         return (datasim);
@@ -186,37 +190,41 @@ public class LecteurDonnees {
 
     /**
      * Lit et affiche les donnees des robots.
+     * @param map
      */
-    private void lireRobots() throws DataFormatException {
+    private Robots[] lireRobots(Carte map) throws DataFormatException {
         ignorerCommentaires();
+        Robots[] robotL;
         try {
             int nbRobots = scanner.nextInt();
+            robotL = new Robots[nbRobots];
             System.out.println("Nb de robots = " + nbRobots);
             for (int i = 0; i < nbRobots; i++) {
-                lireRobot(i);
+                lireRobot(i, robotL, map);
             }
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("Format invalide. "
                     + "Attendu: nbRobots");
         }
+        return robotL;
     }
 
 
     /**
      * Lit et affiche les donnees du i-eme robot.
+     * @param roboti
      * @param i
+     * @param map
      */
-    private void lireRobot(int i) throws DataFormatException {
+    private void lireRobot(int i, Robots[] robotL, Carte map) throws DataFormatException {
         ignorerCommentaires();
-        System.out.print("Robot " + i + ": ");
 
         try {
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
             System.out.print("position = (" + lig + "," + col + ");");
             String type = scanner.next();
-
             System.out.print("\t type = " + type);
 
 
@@ -227,8 +235,37 @@ public class LecteurDonnees {
 
             if (s == null) {
                 System.out.print("valeur par defaut");
+                switch (type) {
+                    case("DRONE"):
+                        robotL[i] = new Drone(map.getCase(lig,col));
+                        break;
+                    case("ROUES"):
+                        robotL[i] = new RobotRoues(map.getCase(lig,col));
+                        break;
+                    case("PATTES"):
+                        robotL[i] = new RobotPattes(map.getCase(lig,col));
+                        break;
+                    case("CHENILLES"):
+                        robotL[i] = new RobotChenilles(map.getCase(lig,col));
+                        break;
+                }
             } else {
                 int vitesse = Integer.parseInt(s);
+                switch (type) {
+                    case ("DRONE"):
+                        robotL[i] = new Drone(map.getCase(lig, col), vitesse);
+                        break;
+                    case ("ROUES"):
+                        robotL[i] = new RobotRoues(map.getCase(lig, col));
+                        break;
+                    case ("PATTES"):
+                        System.out.println("Erreur, toujours vitesse par défaut, mauvais switch");
+                        break;
+                    case ("CHENILLES"):
+                        robotL[i] = new RobotChenilles(map.getCase(lig, col), vitesse);
+                        break;
+                }
+
                 System.out.print(vitesse);
             }
             verifieLigneTerminee();

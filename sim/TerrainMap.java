@@ -67,7 +67,7 @@ class TerrainMap implements Simulable {
     private void drawCaseIncendie(Case gcase) {
         x = gcase.getColonne()*64;
         y = gcase.getLigne()*64;
-        gui.addGraphicalElement(new ImageElement(x+8,y+8,"sprites/fire.png",48,48,null));
+        gui.addGraphicalElement(new ImageElement(x+8,y+8,"src/sprites/fire.png",48,48,null));
     }
 
     private void drawCaseTerrain(Case gcase) {
@@ -75,20 +75,20 @@ class TerrainMap implements Simulable {
         y = gcase.getLigne()*64;
         switch (gcase.getTerrain()) {
             case FORET:
-                gui.addGraphicalElement(new ImageElement(x,y,"sprites/forest.png",64,64,null));
+                gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/forest.png",64,64,null));
                 break;
             case EAU:
-                gui.addGraphicalElement(new ImageElement(x,y,"sprites/water.gif",64,64,null));
+                gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/water.gif",64,64,null));
                 break;
             case ROCHE:
-                gui.addGraphicalElement(new ImageElement(x,y,"sprites/rock.png",64,64,null));
+                gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/rock.png",64,64,null));
                 break;
             case TERRAIN_LIBRE:
-                gui.addGraphicalElement(new ImageElement(x,y,"sprites/grass.png",64,64,null));
+                gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/grass.png",64,64,null));
                 break;
             case HABITAT:
-                gui.addGraphicalElement(new ImageElement(x,y,"sprites/grass.png",64,64,null));
-                gui.addGraphicalElement(new ImageElement(x+5,y+5,"sprites/house.png",54,54,null));
+                gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/grass.png",64,64,null));
+                gui.addGraphicalElement(new ImageElement(x+5,y+5,"src/sprites/house.png",54,54,null));
                 break;
         }
     }
