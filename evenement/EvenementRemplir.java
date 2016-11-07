@@ -5,17 +5,17 @@ import enumdata.Direction;
 
 public class EvenementRemplir extends Evenement {
 	private Robots r ;
-	private Case pos ;
 
 	public EvenementRemplir( int date, Robots rob, Case c) {
 		super(date);
 		this.r = rob;
-		this.pos = c;
 	}
 
 	public void execute() {
+		Case pos;
+		pos = this.r.getPosition();
 		super.execute();
-		if (this.pos.getTerrain() == EAU) {
+		if (pos.getTerrain().equalsTerrain(EAU)) {
 			this.r.remplirReservoir();
 			System.out.println(" Le robot a remplis son réservoir d'eau");
 		}
