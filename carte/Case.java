@@ -51,7 +51,7 @@ public class Case {
         this.incendie = incendie;
     }
 
-    void setQteEau(int qteEau) {
+    public void setQteEau(int qteEau) {
         this.qteEau = qteEau;
     }
 
@@ -65,10 +65,27 @@ public class Case {
         return (this.terrain == NatureTerrain.valueOf(str));
     }
 
-    public String getCoord() {
-        String str = "("+this.colonne+","+this.ligne+")";
-        return str;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Case aCase = (Case) o;
+
+        if (ligne != aCase.ligne) return false;
+        return colonne == aCase.colonne;
+
     }
 
+    @Override
+    public String toString() {
+        return "Case{" +
+                "ligne=" + ligne +
+                ", colonne=" + colonne +
+                ", terrain=" + terrain +
+                ", incendie=" + incendie +
+                ", qteEau=" + qteEau +
+                '}';
+    }
 }
 

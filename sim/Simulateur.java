@@ -2,9 +2,7 @@ package sim;
 
 import carte.Case;
 import enumdata.Direction;
-import evenement.Evenement;
-import evenement.EvenementMoveCoord;
-import evenement.EvenementMoveDir;
+import evenement.*;
 import gui.GUISimulator;
 import gui.ImageElement;
 import gui.Simulable;
@@ -14,6 +12,7 @@ import robot.*;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
+
 import java.util.zip.DataFormatException;
 
 /**
@@ -23,7 +22,8 @@ import java.util.zip.DataFormatException;
 public class Simulateur implements Simulable {
         private DonneesSimulation datasim = null;
         private GUISimulator gui;
-
+        private Timeline timeline;
+        private int currentdate;
 
         public Simulateur(String [] args) {
             //lecture du fichier et initialisation de datasim
@@ -31,6 +31,10 @@ public class Simulateur implements Simulable {
 
             //création de la gui
             createGUI();
+
+            //timeline creation
+            timeline = new Timeline(datasim);
+            this.currentdate = 1;
 
             // association a la gui!
             gui.setSimulable(this);
@@ -45,6 +49,13 @@ public class Simulateur implements Simulable {
 
         @Override
         public void next() {
+            System.out.println("DATE "+ this.currentdate);
+            System.out.println("---------------------");
+            showEvents(currentdate);
+            executeEvents(currentdate);
+            drawTerrain();
+            drawRobots();
+            currentdate++;
         }
 
         @Override
@@ -134,14 +145,41 @@ public class Simulateur implements Simulable {
             }
         }
 
-        public void addEvent(int date, Direction dir) {
-            EvenementMoveDir event = new EvenementMoveDir(date,dir);
-            event.execute();
+        public void addEventDirection(int date, Robots rbt, Direction dir) {
+            EvenementMoveDir event = new EvenementMoveDir(date,rbt,dir);
+            timeline.addEvent(event);
         }
 
-        public void addEvent(int date, int lig, int col) {
+        public void addEventCoord(int date, int lig, int col) {
             EvenementMoveCoord event = new EvenementMoveCoord(date,lig,col);
-            event.execute();
+            timeline.addEvent(event);
+        }
+
+        public void addEventArrive(int date, Robots r, int lig, int col) {
+            EvenementArrive event = new EvenementArrive(date,r,lig,col);
+            timeline.addEvent(event);
+        }
+
+        public void addEventRemplir(int date, Robots r) {
+            EvenementRemplir event = new EvenementRemplir(date, r);
+            timeline.addEvent(event);
+        }
+
+        public void addEventIntervention(int date, Robots r) {
+            EvenementIntervention event = new EvenementIntervention(date, r);
+            timeline.addEvent(event);
+        }
+
+        public void showEvents(int date) {
+            timeline.showEvents(date);
+        }
+
+        private void executeEvents(int date) {
+            timeline.executeEvents(date);
+        }
+
+        public Robots getaRobot(int index) {
+            return datasim.getRobotL()[index];
         }
 
 }

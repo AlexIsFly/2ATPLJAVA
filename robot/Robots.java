@@ -30,6 +30,10 @@ public class Robots {
         this.caseRobot = new Case();
     }
 
+    public Reservoir getReservoir() {
+        return reservoir;
+    }
+
     public Case getPosition() {
         return this.caseRobot;
     }
@@ -56,7 +60,7 @@ public class Robots {
         }
         return 0;
     }
-    void deverserEau(int volume)  {
+    public void deverserEau(int volume)  {
         // Décrémenter le volume du robot mais aussi décrémenter l'incendie : attendre DORR
         // Dire également le temps que ça a mis à verser l'eau
         double temps;
@@ -66,9 +70,9 @@ public class Robots {
                 this.reservoir.setVolumeCourant(this.reservoir.getVolumeCourant() - volume);
             }
             else {
-                volume = volume - this.reservoir.volumeCourant;
+                int volume2 = volume - this.reservoir.volumeCourant;
                 this.reservoir.setVolumeCourant(0);
-                System.out.println("Seulement " + volume + " d'eau a pu être versé.");
+                System.out.println("Seulement " + volume2 + " d'eau a pu être versé.");
             }
         }
         temps = ((volume % this.reservoir.getVolumeIntervention())/this.reservoir.getVolumeIntervention())*this.reservoir.getTempsIntervention();
@@ -110,4 +114,7 @@ public class Robots {
 
 
     } */
+    public void remplirReservoir(){
+        System.out.println("Superclass remplirReservoir");
+    }
 }

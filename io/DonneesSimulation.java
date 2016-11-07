@@ -9,10 +9,7 @@ import robot.Robots;
 public class DonneesSimulation {
     private Carte carte;
     private Robots[] robotL;
-    /*
-    please add the others instance of Robots+Incendies as attributes
-    and add it to the constructor below
-    */
+
     public DonneesSimulation(Carte map, Robots[] robotL) {
         this.carte = map;
         this.robotL = robotL;
