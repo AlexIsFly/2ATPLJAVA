@@ -15,7 +15,7 @@ public class EvenementRemplir extends Evenement {
 		Case pos;
 		pos = this.r.getPosition();
 		super.execute();
-		if (pos.getTerrain().equalsTerrain(EAU)) {
+		if (pos.getTerrain().equalsTerrain(EAU)) {  // En réalité ca marche que pour les drones car les robots à chenilles et à roues doivent être à coté
 			this.r.remplirReservoir();
 			System.out.println(" Le robot a remplis son réservoir d'eau");
 		}
