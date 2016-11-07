@@ -20,7 +20,7 @@ public class EvenementMoveDir extends Evenement {
     }
 
     public void execute(Carte map){
-        System.out.println(toString());
+        System.out.println(toString() + "FAIT !");
         switch (dir) {
             case NORD:
                 this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(),Direction.NORD));

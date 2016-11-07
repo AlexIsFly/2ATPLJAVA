@@ -71,12 +71,12 @@ public class Carte {
         switch (dir){
             case NORD:
                 if (voisinExiste(depart,Direction.NORD)) {
-                    return map[depart.getLigne() + 1][depart.getColonne()];
+                    return map[depart.getLigne() - 1][depart.getColonne()];
                 }
                 break;
             case SUD:
                 if (voisinExiste(depart,Direction.SUD)) {
-                    return map[depart.getLigne() - 1][depart.getColonne()];
+                    return map[depart.getLigne() + 1][depart.getColonne()];
                 }
                 break;
             case EST:

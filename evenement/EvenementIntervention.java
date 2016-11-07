@@ -18,15 +18,14 @@ public class EvenementIntervention extends Evenement {
 	public void execute(Carte carte) {
 		int Qte;
 		Case pos = this.r.getPosition();
-		if ( (carte.getVoisin(this.r.getPosition(), Direction.NORD).isIncendie()
-				|| carte.getVoisin(this.r.getPosition(), Direction.SUD).isIncendie()
-				|| carte.getVoisin(this.r.getPosition(), Direction.EST).isIncendie()
-				|| carte.getVoisin(this.r.getPosition(), Direction.OUEST).isIncendie())) {
+		if (pos.isIncendie()) {
+            System.out.println("L'incendie est d'intensité : "+pos.getQteEau());
 			Qte = min(this.r.getReservoir().getVolumeCourant() , pos.getQteEau());  // la quantité que l'on va verser est le min entre ce que l'on peut verser et ce que l'on doit verser
 			this.r.deverserEau(Qte);
 			pos.setQteEau(pos.getQteEau()-Qte);
 			System.out.println(" Le robot a déversé "+ Qte +" volume d'eau ");
-		}
+            System.out.println("L'incendie est d'intensité : "+pos.getQteEau());
+        }
 		else
 		{
             System.out.println("Pas de feu adjacent à " + this.r.getPosition().toString());

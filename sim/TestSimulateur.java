@@ -8,13 +8,15 @@ import enumdata.Direction;
  */
 public class TestSimulateur {
     public static void main(String[] args) {
-        Simulateur simulateur = new Simulateur(args);
+        Simulateur sim = new Simulateur(args);
 
-        simulateur.addEventDirection(2, simulateur.getaRobot(0), Direction.EST);
-        simulateur.addEventDirection(1, simulateur.getaRobot(1), Direction.EST);
-        simulateur.addEventArrive(2,simulateur.getaRobot(1),3,3);
-        simulateur.addEventCoord(2,3,5);
-        simulateur.addEventIntervention(2,simulateur.getaRobot(0));
-        simulateur.addEventRemplir(2,simulateur.getaRobot(0));
+        //la methode getaRobot permet d'obtenir un robot dans la liste des robots
+        sim.addEventRemplir(1,sim.getaRobot(0));
+        sim.addEventDirection(2,sim.getaRobot(0),Direction.SUD);
+        sim.addEventDirection(3,sim.getaRobot(0),Direction.SUD);
+        sim.addEventDirection(4,sim.getaRobot(0),Direction.EST);
+        sim.addEventDirection(5,sim.getaRobot(0),Direction.EST);
+        sim.addEventIntervention(6,sim.getaRobot(0));
+
     }
 }

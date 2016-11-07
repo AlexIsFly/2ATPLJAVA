@@ -28,5 +28,6 @@ public class Drone extends Robots {
         if (this.caseRobot.equalsTerrain("EAU")) {
             this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
         }
+        System.out.println("Remplissage effectué");
     }
 }
