@@ -16,7 +16,7 @@ public class EvenementIntervention extends Evenement {
 		Case pos;
 		pos=this.r.getPosition();
 		super.execute();
-		if ( pos.isIncendie()) {   // en réalité il faudrait vérifier si une des cases voisine est en feu 
+		if ( pos.isIncendie()) {   
 			Qte = min(this.r.getReservoir(),this.pos.getQteEau());  // la quantité que l'on va verser est le min entre ce que l'on peut verser et ce que l'on doit verser
 			this.r.deverserEau(Qte);
 			this.pos.setQteEau(this.pos.getQteEau()-Qte);
