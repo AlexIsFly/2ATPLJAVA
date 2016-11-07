@@ -1,24 +1,25 @@
 package evenement;
 
-import enumdata.Action;
-import enumdata.Direction;
+import carte.Carte;
+import robot.Robots;
 
 public class EvenementRemplir extends Evenement {
 	private Robots r ;
 
-	public EvenementRemplir( int date, Robots rob, Case c) {
+	public EvenementRemplir( int date, Robots rob) {
 		super(date);
 		this.r = rob;
 	}
 
-	public void execute() {
-		Case pos;
-		pos = this.r.getPosition();
-		super.execute();
-		if (pos.getTerrain().equalsTerrain(EAU)) {  // En réalité ca marche que pour les drones car les robots à chenilles et à roues doivent être à coté
-			this.r.remplirReservoir();
-			System.out.println(" Le robot a remplis son réservoir d'eau");
-		}
+	public void execute(Carte carte) {
+        r.remplirReservoir();
 	}
 
+    @Override
+    public String toString() {
+        return "EvenementRemplir{" +
+                super.toString() +
+                ", Remplissage" +
+                '}';
+    }
 }

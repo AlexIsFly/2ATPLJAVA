@@ -1,7 +1,7 @@
 package evenement;
 
-import carte.Case;
-import enumdata.Direction;
+
+import carte.Carte;
 
 /**
  * Created by alexisgacel on 31/10/2016.
@@ -17,8 +17,16 @@ public class EvenementMoveCoord extends Evenement {
         this.col = col;
     }
 
-    public void execute(){
-        super.execute();
-        System.out.println(" | MoveCoord : ("+this.col+","+this.lig+")");
+    public void execute(Carte carte){
+        System.out.println(toString());
+    }
+
+    @Override
+    public String toString() {
+        return "EvenementMoveCoord{" +
+                super.toString() +
+                ", lig=" + lig +
+                ", col=" + col +
+                '}';
     }
 }
