@@ -51,6 +51,11 @@ public class LecteurDonnees {
         Carte map = lecteur.lireCarte();
         lecteur.lireIncendies(map);
 
+        // Création des graphes en fonction des types de robot
+        Drone.creeGraphe(map);
+        RobotChenilles.creeGraphe(map);
+        RobotPattes.creeGraphe(map);
+        RobotRoues.creeGraphe(map);
         //creation + remplissage de l'instance liste de Robots
         Robots[] robotL = lecteur.lireRobots(map);
 
