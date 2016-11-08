@@ -45,7 +45,7 @@ public class Chemin {
         // On met la valeur du poids de la case de départ à 0 et tous les autres très grandes
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                if (this.coordCaseDepart[0] == i && this.coordCaseDepart[1] == j) {
+                if ((this.coordCaseDepart[0] == i) && (this.coordCaseDepart[1] == j)) {
                     this.tab_poids[i][j][2] = 0;
                 }
                 else {

@@ -12,10 +12,10 @@ public class TestSimulateur {
 
         //la methode getaRobot permet d'obtenir un robot dans la liste des robots
         sim.addEventRemplir(1,sim.getaRobot(0));
-        sim.addEventDirection(2,sim.getaRobot(0),Direction.SUD);
-        sim.addEventDirection(3,sim.getaRobot(0),Direction.SUD);
-        sim.addEventDirection(4,sim.getaRobot(0),Direction.EST);
-        sim.addEventDirection(5,sim.getaRobot(0),Direction.EST);
+        sim.addEventDirection(2,sim.getaRobot(0),Direction.NORD);
+        sim.addEventDirection(3,sim.getaRobot(0),Direction.NORD);
+        sim.addEventDirection(4,sim.getaRobot(0),Direction.NORD);
+        sim.addEventDirection(5,sim.getaRobot(0),Direction.NORD);
         sim.addEventIntervention(6,sim.getaRobot(0));
 
     }

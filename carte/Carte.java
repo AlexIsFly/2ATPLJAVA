@@ -2,8 +2,7 @@ package carte;
 
 import enumdata.Direction;
 import enumdata.NatureTerrain;
-
-import java.util.ArrayList;
+import exceptions.CaseOutOfMapException;
 
 /**
  * Created by alexisgacel on 21/10/2016.
@@ -69,28 +68,28 @@ public class Carte {
         return existe;
     }
 
-    public Case getVoisin(Case depart, Direction dir) {
+    public Case getVoisin(Case depart, Direction dir) throws CaseOutOfMapException {
         switch (dir){
             case NORD:
                 if (voisinExiste(depart,Direction.NORD)) {
                     return map[depart.getLigne() - 1][depart.getColonne()];
                 }
-                break;
+                else throw new CaseOutOfMapException("");
             case SUD:
                 if (voisinExiste(depart,Direction.SUD)) {
                     return map[depart.getLigne() + 1][depart.getColonne()];
                 }
-                break;
+                else throw new CaseOutOfMapException("Case Interdite");
             case EST:
                 if (voisinExiste(depart,Direction.EST)) {
                     return map[depart.getLigne()][depart.getColonne() + 1];
                 }
-                break;
+                else throw new CaseOutOfMapException("Case Interdite");
             case OUEST:
                 if (voisinExiste(depart,Direction.OUEST)) {
                     return map[depart.getLigne()][depart.getColonne() - 1];
                 }
-                break;
+                else throw new CaseOutOfMapException("Case Interdite");
         }
         return depart;
     }

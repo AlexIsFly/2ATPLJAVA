@@ -2,10 +2,6 @@ package robot;
 
 import carte.Carte;
 import carte.Case;
-import carte.Graphe;
-import sun.awt.image.ImageWatched;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -15,6 +11,7 @@ public class Drone extends Robots {
 
     private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;;
     // Quand la vitesse est spécifiée dans le fichier
+
     public Drone (Case caseRobot, double vitesseTerrainLibre) {
         super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(vitesseTerrainLibre));
     }

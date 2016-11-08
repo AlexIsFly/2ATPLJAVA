@@ -2,7 +2,7 @@ package evenement;
 
 import carte.Carte;
 import enumdata.Direction;
-import io.DonneesSimulation;
+import exceptions.CaseOutOfMapException;
 import robot.Robots;
 
 /**
@@ -20,20 +20,25 @@ public class EvenementMoveDir extends Evenement {
     }
 
     public void execute(Carte map){
-        System.out.println(toString() + "FAIT !");
-        switch (dir) {
-            case NORD:
-                this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(),Direction.NORD));
-                break;
-            case SUD:
-                this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(),Direction.SUD));
-                break;
-            case EST:
-                this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(),Direction.EST));
-                break;
-            case OUEST:
-                this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(),Direction.OUEST));
-                break;
+        try {
+            switch (dir) {
+                case NORD:
+                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.NORD));
+                    break;
+                case SUD:
+                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.SUD));
+                    break;
+                case EST:
+                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.EST));
+                    break;
+                case OUEST:
+                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.OUEST));
+                    break;
+            }
+            System.out.println(toString() + "FAIT !");
+        } catch(CaseOutOfMapException e) {
+            e.printStackTrace();
+            System.out.println("Déplacement Interdit !!");
         }
     }
 
