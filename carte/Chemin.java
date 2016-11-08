@@ -46,10 +46,10 @@ public class Chemin {
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 if (this.coordCaseDepart[0] == i && this.coordCaseDepart[1] == j) {
-                    this.tab_poids[i][j][2] = 0;
+                    this.tab_poids[i][j][1] = 0;
                 }
                 else {
-                    this.tab_poids[i][j][2] = 100000000;
+                    this.tab_poids[i][j][1] = 100000000;
                 }
             }
         }
@@ -79,14 +79,23 @@ public class Chemin {
             Iterator itr = this.graphe.get(caseCour[0]).get(caseCour[1]).iterator();
             while (itr.hasNext()) {
                 // On regarde chaque fils
-                int[] fils = new int[3];
-                fils = (int[])itr.next();
-                // On regarde si le fils n'est pas marqué
-                if (tab_antecedents[fils[0]][fils[1]][1] == 0) {
-
+                int[] liaisonFils = new int[3];
+                liaisonFils = (int[])itr.next();
+                // On regarde si le fils n'est pas marqué, on met à jour son poids
+                if (tab_antecedents[liaisonFils[0]][liaisonFils[1]][1] == 0) {
+                    // Si poids père + poids liaison père-fils < poids fils
+                    // Alors Poids fils = poids père + poids liaison père-fils
+                    if (tab_poids[caseCour[0]][caseCour[1]][0] + liaisonFils[2] < tab_poids[liaisonFils[0]][liaisonFils[1]][0]) {
+                        tab_poids[liaisonFils[0]][liaisonFils[1]][0] = tab_poids[caseCour[0]][caseCour[1]][0] + liaisonFils[2];
+                    }
+                    // On met à jour le tableau des antécédents, l'antécédent de la case (i, j) devient le père
+                    tab_antecedents[liaisonFils[0]][liaisonFils[1]][0] = caseCour[0];
+                    tab_antecedents[liaisonFils[0]][liaisonFils[1]][1] = caseCour[1];
                 }
                 itr.next();
             }
+            // On marque la case
+            this.tab_poids[caseCour[0]][caseCour[1]][1] = 1;
         }
 
     }
