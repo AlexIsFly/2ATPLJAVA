@@ -3,6 +3,8 @@ package carte;
 import enumdata.Direction;
 import enumdata.NatureTerrain;
 
+import java.util.ArrayList;
+
 /**
  * Created by alexisgacel on 21/10/2016.
  * For Project Java ISSC - IMAG 2016
