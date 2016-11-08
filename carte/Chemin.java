@@ -37,6 +37,19 @@ public class Chemin {
                 this.getTab()[k][l]=10000; // on fixe tout les poids des sommets à l'infini
             }
         }
+        this.getTab()[this.getRobots().getPosition().getLigne()][this.getRobots().getPosition().getColonne()]=0;
+    }
 
+    public void djikstra(int i,int j) {  // i et j sont les coordonnées de la case d'arrivé
+        int posi, posy;
+        posi=this.getRobots().getPosition().getLigne();
+        posy=this.getRobots().getPosition().getColonne();
+        if( i < nbligne && j< nbcolonne) {
+            throw new IllegalArgumentException("La destination est en dehors de la carte");
+        }
+        else
+            while (this.getTab()[i][j] != 10000) {
+
+            }
     }
  */
