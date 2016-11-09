@@ -4,6 +4,7 @@ import carte.Carte;
 import carte.Case;
 import carte.Graphe;
 import enumdata.Direction;
+import exceptions.CaseOutOfMapException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -33,14 +34,19 @@ public class RobotChenilles extends Robots {
     }
 
     public void remplirReservoir(Carte carte) {
-        if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
-                || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")
-                || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
-                || carte.getVoisin(this.caseRobot, Direction.OUEST).equalsTerrain("EAU")) {
-            this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
-        }
-        else {
-            System.out.println("Le robot ne peut pas remplir son réservoir !");
+        try {
+            if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
+                    || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")
+                    || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
+                    || carte.getVoisin(this.caseRobot, Direction.OUEST).equalsTerrain("EAU")) {
+                this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
+            }
+            else {
+                System.out.println("Le robot ne peut pas remplir son réservoir !");
+            }
+        } catch (CaseOutOfMapException e) {
+            System.out.println("Verification effectuée en dehors de la carte");
+            e.printStackTrace();
         }
     }
 

@@ -2,10 +2,9 @@ package robot;
 
 import carte.Carte;
 import carte.Case;
-import carte.Graphe;
 import enumdata.Direction;
+import exceptions.CaseOutOfMapException;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -32,7 +31,7 @@ public class RobotRoues extends Robots {
         this.reservoir = new Reservoir(5000, 600, 100, 5);
     }
 
-    public void remplirReservoir(Carte carte) {
+    public void remplirReservoir(Carte carte) throws CaseOutOfMapException {
         if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
                 || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")
                 || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
