@@ -181,5 +181,9 @@ public class Simulateur implements Simulable {
         public Robots getaRobot(int index) {
             return datasim.getRobotL()[index];
         }
+        
+        public int getDate(){
+            return this.currentdate;
+        }
 
 }
