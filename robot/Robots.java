@@ -122,18 +122,15 @@ public class Robots {
         int[] posCourante = new int[this.getCase().getLigne()][this.getCase().getColonne()];
         LinkedList<int[]> tabChemin = new LinkedList<int[]>();
         // On doit creer le graphe g ici en utilisant map
-        int d;
         Chemin c = new Chemin( posCourante, coordArrivee, g);
         tabChemin=c.plusCourtChemin();
-        d = sim.getDate();
         while ( coordArrivee[0] !=  posCourante[0] && coordArrivee[1] != posCourante[1]){
             int i = 0;
-            sim.addEventCoord(d,tabCheminchemin(i)[0],tabChemin(i)[1]); // cette méthode ne devrait elle pas prendre un robot en paramètre comme tout les autres addEvent ??
+            sim.addEventCoord(sim.getDate()+i;,tabCheminchemin(i)[0],tabChemin(i)[1]); // cette méthode ne devrait elle pas prendre un robot en paramètre comme tout les autres addEvent ??
             // on se déplace le long du chemin jusqu'a arriver a la fin
             posCourante[0]=tabChemin(i)[0];
             posCourante[1]=tabChemin(i)[1];
             i++;
-            d++;
         }
         sim.addEventArrive(d,this, coordArrivee[0], coordArrivee[1]);
         System.out.println("Le robot est arrivé à la case (" + posCourante[0] + ";" + posCourante[1]+") ");
@@ -141,21 +138,19 @@ public class Robots {
 
     public void creerEvenementIntervenir(Simulateur sim, Carte map, int[] coordIntervention) {
         int[] posCourante = new int[this.getCase().getLigne()][this.getCase().getColonne()];
-        int d = sim.getDate();
         if (coordIntervention[0] !=  posCourante[0] && coordIntervention[1] != posCourante[1]){ // Si on n'est pas sur le lieu de l'intervention on commence par s'y rendre
             this.creerEvenementDeplacer(sim,map,coordIntervention);
         }
-        addEventIntervention(d,this);
+        addEventIntervention(sim.getDate(),this); // problème pour trouver la bonne date 
         System.out.println("Le robot est intervenu sur la case " + coordIntervention[0] + ";" + coordIntervention[1]+") ");
     }
     
     public void creerEvenementRemplir(Simulateur sim, Carte map, int[] coordRemplissage) {
         int[] posCourante = new int[this.getCase().getLigne()][this.getCase().getColonne()];
-        int d = sim.getDate();
         if (coordRemplissage[0] !=  posCourante[0] && coordRemplissage[1] != posCourante[1]){ // Si on n'est pas sur le lieu ddu remplissage on commence par s'y rendre
             this.creerEvenementDeplacer(sim,map,coordIntervention);
         }
-        addEventRemplir(d,this);
+        addEventRemplir(sim.getDate(),this);
         System.out.println("Le robot a remplis son réservoir sur la case " + coordIntervention[0] + ";" + coordIntervention[1]+") ");
     }
 }
