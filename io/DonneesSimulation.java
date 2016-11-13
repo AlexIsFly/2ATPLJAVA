@@ -22,6 +22,7 @@ public class DonneesSimulation {
     public Carte getCarte() {
         return carte;
     }
+
     public Robots[] getRobotL() {
         return this.robotL;
     }

@@ -2,8 +2,6 @@ package robot;
 
 import carte.Carte;
 import carte.Case;
-import carte.Graphe;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -25,6 +23,10 @@ public class RobotPattes extends Robots {
         this.vitesse = new Vitesse(30, 30, 0, 10, 30);
         this.reservoir = new Reservoir(1000000000, 0, 10, 1);
         this.reservoir.setVolumeCourant(1000000000);
+    }
+
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return RobotPattes.graphe;
     }
 
     public static void creeGraphe(Carte carte) {

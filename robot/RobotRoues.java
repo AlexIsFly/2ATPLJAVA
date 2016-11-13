@@ -31,6 +31,10 @@ public class RobotRoues extends Robots {
         this.reservoir = new Reservoir(5000, 600, 100, 5);
     }
 
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return RobotRoues.graphe;
+    }
+
     public void remplirReservoir(Carte carte) throws CaseOutOfMapException {
         if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
                 || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")

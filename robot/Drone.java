@@ -9,7 +9,7 @@ import java.util.LinkedList;
  */
 public class Drone extends Robots {
 
-    private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;;
+    private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;
     // Quand la vitesse est spécifiée dans le fichier
 
     public Drone (Case caseRobot, double vitesseTerrainLibre) {
@@ -33,6 +33,10 @@ public class Drone extends Robots {
             this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
         }
         System.out.println("Remplissage effectué");
+    }
+
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return Drone.graphe;
     }
 
     public static void creeGraphe(Carte carte) {
