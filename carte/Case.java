@@ -39,6 +39,13 @@ public class Case {
         return colonne;
     }
 
+    public int[] getCoord() {
+        int[] coord = new int[2];
+        coord[0] = this.ligne;
+        coord[1] = this.colonne;
+        return coord;
+    }
+
     public NatureTerrain getTerrain() {
         return terrain;
     }

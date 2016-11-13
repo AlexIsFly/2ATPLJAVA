@@ -2,6 +2,7 @@ package evenement;
 
 
 import carte.Carte;
+import robot.Robots;
 
 /**
  * Created by alexisgacel on 31/10/2016.
@@ -10,9 +11,11 @@ import carte.Carte;
 public class EvenementMoveCoord extends Evenement {
     private int lig;
     private int col;
+    private Robots rbt;
 
-    public EvenementMoveCoord(int date, int lig, int col) {
+    public EvenementMoveCoord(int date, Robots rbt ,int lig, int col) {
         super(date);
+        this.rbt = rbt;
         this.lig = lig;
         this.col = col;
     }

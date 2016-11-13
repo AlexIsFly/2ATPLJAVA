@@ -1,6 +1,8 @@
 package sim;
 
 import carte.Case;
+import carte.Chemin;
+import carte.GrapheRobots;
 import enumdata.Direction;
 import evenement.*;
 import gui.GUISimulator;
@@ -13,6 +15,9 @@ import robot.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
 /**
@@ -35,6 +40,9 @@ public class Simulateur implements Simulable {
             //timeline creation
             timeline = new Timeline(datasim);
             this.currentdate = 1;
+
+            //creation graph for each robot
+            fillGrapheRobots();
 
             // association a la gui!
             gui.setSimulable(this);
@@ -74,6 +82,13 @@ public class Simulateur implements Simulable {
             } catch (DataFormatException e) {
                 System.out.println("\n\t**format du fichier " + args[0] + " invalide: " + e.getMessage());
             }
+        }
+
+        private void fillGrapheRobots(){
+            Drone.creeGraphe(datasim.getCarte());
+            RobotChenilles.creeGraphe(datasim.getCarte());
+            RobotPattes.creeGraphe(datasim.getCarte());
+            RobotRoues.creeGraphe(datasim.getCarte());
         }
 
         private void createGUI(){
@@ -150,18 +165,33 @@ public class Simulateur implements Simulable {
             timeline.addEvent(event);
         }
 
-        public void addEventCoord(int date, int lig, int col) {
-            EvenementMoveCoord event = new EvenementMoveCoord(date,lig,col);
-            timeline.addEvent(event);
+        public void addEventCoord(Robots rbt ,int lig, int col) {
+            int[] posCourante = rbt.getPosition().getCoord();
+            int[] posFinale = {lig,col};
+            LinkedList<int[]> tabChemin;
+            // On doit creer le graphe g ici en utilisant map
+            Chemin c = new Chemin( posCourante, posFinale, Drone.getGraphe());
+            tabChemin=c.plusCourtChemin();
+            ListIterator li = tabChemin.listIterator();
+
+            while (li.hasNext()){
+                System.out.println("ligne : "+ li.next().toString());
+                 /*
+                int i = 0;
+                sim.addEventCoord(sim.getDate()+i;,tabCheminchemin(i)[0],tabChemin(i)[1]); // cette méthode ne devrait elle pas prendre un robot en paramètre comme tout les autres addEvent ??
+                // on se déplace le long du chemin jusqu'a arriver a la fin
+                posCourante[0]=tabChemin(i)[0];
+                posCourante[1]=tabChemin(i)[1];
+                i++;
+                */
+            }
         }
 
-        public void addEventArrive(int date, Robots r, int lig, int col) {
-            EvenementArrive event = new EvenementArrive(date,r,lig,col);
-            timeline.addEvent(event);
+        public void addEventArrive(Robots r, int lig, int col) {
         }
 
         public void addEventRemplir(int date, Robots r) {
-            EvenementRemplir event = new EvenementRemplir(date, r);
+            EvenementRemplir event = new EvenementRemplir(date,r);
             timeline.addEvent(event);
         }
 
@@ -181,9 +211,39 @@ public class Simulateur implements Simulable {
         public Robots getaRobot(int index) {
             return datasim.getRobotL()[index];
         }
-        
+
         public int getDate(){
             return this.currentdate;
         }
 
+        public void demandeUtilisateur() {
+            Scanner sc = new Scanner(System.in);
+            int choice, lig, col;
+
+            Robots[] robotL = datasim.getRobotL();
+            for (Robots rbt : robotL) {
+                if (rbt.isIdle()) {
+                    do {
+                        System.out.println("Planification pour la date : " + currentdate+1);
+                        System.out.println("Que souhaitez vous faire pour le robot situé sur " + rbt.getPosition().toString());
+                        System.out.println("1) Déplacer le robot");
+                        System.out.println("2) Intervenir sur un incendie");
+                        System.out.println("3) Remplir son reservoir");
+                        choice = sc.nextInt();
+                    }
+                    while (!(choice == 1 || choice == 2 || choice==3));
+                    System.out.println("Votre choix est : "+ choice);
+                    if(choice == 1){
+                        System.out.println("Coordonnées : quelle ligne ?");
+                        lig = sc.nextInt();
+                        System.out.println("Coordonnées : quelle colonne ?");
+                        col = sc.nextInt();
+                        addEventCoord(rbt, lig, col);
+                    }
+                }
+                else {
+                    System.out.println("Ce robot est occupé -- Case : " +rbt.getPosition().toString());
+                }
+            }
+        }
 }

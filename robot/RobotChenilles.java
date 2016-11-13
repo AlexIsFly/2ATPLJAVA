@@ -2,7 +2,6 @@ package robot;
 
 import carte.Carte;
 import carte.Case;
-import carte.Graphe;
 import enumdata.Direction;
 import exceptions.CaseOutOfMapException;
 
@@ -31,6 +30,10 @@ public class RobotChenilles extends Robots {
         super();
         this.vitesse = new Vitesse(60, 30, 0, 0, 60);
         this.reservoir = new Reservoir(2000, 300, 100, 8);
+    }
+
+    public static LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return graphe;
     }
 
     public void remplirReservoir(Carte carte) {
