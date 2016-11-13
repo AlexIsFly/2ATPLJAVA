@@ -51,8 +51,8 @@ public class Robots {
         return this.caseRobot;
     }
 
-    public static LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return graphe;
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return this.graphe;
     }
 
     public void setPosition(Case caseUser) {

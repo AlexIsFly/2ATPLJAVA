@@ -35,8 +35,8 @@ public class Drone extends Robots {
         System.out.println("Remplissage effectué");
     }
 
-    public static LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return graphe;
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return Drone.graphe;
     }
 
     public static void creeGraphe(Carte carte) {

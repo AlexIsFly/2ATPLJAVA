@@ -25,8 +25,8 @@ public class RobotPattes extends Robots {
         this.reservoir.setVolumeCourant(1000000000);
     }
 
-    public static LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return graphe;
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return RobotPattes.graphe;
     }
 
     public static void creeGraphe(Carte carte) {

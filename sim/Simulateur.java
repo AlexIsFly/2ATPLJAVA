@@ -170,7 +170,7 @@ public class Simulateur implements Simulable {
             int[] posFinale = {lig,col};
             LinkedList<int[]> tabChemin;
             // On doit creer le graphe g ici en utilisant map
-            Chemin c = new Chemin( posCourante, posFinale, Drone.getGraphe());
+            Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
             tabChemin=c.plusCourtChemin();
             ListIterator li = tabChemin.listIterator();
 

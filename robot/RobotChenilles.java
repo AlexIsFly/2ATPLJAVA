@@ -32,8 +32,8 @@ public class RobotChenilles extends Robots {
         this.reservoir = new Reservoir(2000, 300, 100, 8);
     }
 
-    public static LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return graphe;
+    public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
+        return RobotChenilles.graphe;
     }
 
     public void remplirReservoir(Carte carte) {
