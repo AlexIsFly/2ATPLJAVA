@@ -103,6 +103,15 @@ public class Robots {
         System.out.println("Superclass remplirReservoir");
     }
 
+    @Override
+    public String toString() {
+        return "Robots{" +
+                "position=" + "("+caseRobot.getCoord()[0]+", "+caseRobot.getCoord()[1]+")" +
+                ", reservoir=" + reservoir.getVolumeCourant() +
+                ", idle=" + idle +
+                '}';
+    }
+
     /*
     public void creerEvenementDeplacer(Simulateur sim, int[] coordArrivee ) {
         int[] posCourante = new int[this.getCase().getLigne()][this.getCase().getColonne()];
