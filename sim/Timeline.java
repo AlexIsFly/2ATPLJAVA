@@ -1,6 +1,7 @@
 package sim;
 
 import evenement.Evenement;
+import evenement.EvenementArrive;
 import io.DonneesSimulation;
 
 import java.util.LinkedList;
@@ -39,7 +40,10 @@ public class Timeline {
         try {
             ListIterator li = dateL.get(date).listIterator();
             while (li.hasNext()){
-                System.out.println(li.next().toString());
+                Evenement eventshow = (Evenement)li.next();
+                if (!(eventshow instanceof EvenementArrive)) {
+                    System.out.println(eventshow.toString() + " PRÉVU");
+                }
             }
         }
         catch (IndexOutOfBoundsException a) {
