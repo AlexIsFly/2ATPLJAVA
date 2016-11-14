@@ -219,15 +219,18 @@ public class Simulateur implements Simulable {
                             //si one est dans ce cas il y a une erreur, car on aurait du sortir du while.
                             case 0:
                                 System.out.println("ERREUR planification déplacement");
-                                break;
+                                rbt.setIdle(true);
+                                return;
                             default:
                                 System.out.println("ERREUR planification déplacement");
-                                break;
+                                rbt.setIdle(true);
+                                return;
                         }
                         break;
                     default:
                         System.out.println("ERREUR planification déplacement");
-                        break;
+                        rbt.setIdle(true);
+                        return;
                 }
                 prevcoord = suivcoord;
                 pseudodate++;
