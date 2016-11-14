@@ -12,6 +12,7 @@ public class Case {
     private int colonne;
     private NatureTerrain terrain;
     private boolean incendie;
+    private boolean incendieAffected;
     private int qteEau;
 
     Case(int ligne, int colonne, NatureTerrain terrain) {
@@ -19,6 +20,7 @@ public class Case {
         this.colonne = colonne;
         this.terrain = terrain;
         this.incendie = false;
+        this.incendieAffected = false;
         this.qteEau = 0;
     }
 
@@ -27,9 +29,17 @@ public class Case {
         this.colonne = 0;
         this.terrain = NatureTerrain.EAU;
         this.incendie = false;
+        this.incendieAffected = false;
         this.qteEau = 0;
     }
 
+    public boolean isIncendieAffected() {
+        return incendieAffected;
+    }
+
+    public void setIncendieAffected(boolean incendieAffected) {
+        this.incendieAffected = incendieAffected;
+    }
 
     public int getLigne() {
         return ligne;
