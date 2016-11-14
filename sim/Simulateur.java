@@ -171,9 +171,10 @@ public class Simulateur implements Simulable {
 
             int[] posCourante = rbt.getPosition().getCoord();
             int[] posFinale = {lig,col};
-            LinkedList<int[]> tabChemin = new LinkedList<int[]>();
+            LinkedList<int[]> tabChemin;
             rbt.setIdle(false);
 
+            /*
             int [] step = {4,3};
             tabChemin.addFirst(step);
             int [] step2 = {5,3};
@@ -185,11 +186,12 @@ public class Simulateur implements Simulable {
             int [] step5 = {7,2};
             tabChemin.addLast(step5);
             int []  step6 = {7,1};
-            tabChemin.addLast(step6);
+            tabChemin.addLast(step6)
+            */
 
             int pseudodate = currentdate;
-            //Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
-            //tabChemin=c.plusCourtChemin();
+            Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
+            tabChemin=c.plusCourtChemin();
             ListIterator li = tabChemin.listIterator();
 
             int[] prevcoord = posCourante;
@@ -292,12 +294,12 @@ public class Simulateur implements Simulable {
                     switch(choice){
                         case 1:
                             //pour des raisons de test, le chemin est prédéfini dans addEventCoord
-                            /*
+
                             System.out.println("Coordonnées : quelle ligne ?");
                             lig = sc.nextInt();
                             System.out.println("Coordonnées : quelle colonne ?");
-                            col = sc.nextInt(); */
-                            addEventCoord(rbt, 0, 0);
+                            col = sc.nextInt();
+                            addEventCoord(rbt, lig, col);
                             break;
                         case 2:
                             rbt.setIdle(false);
