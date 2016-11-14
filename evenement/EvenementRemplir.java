@@ -12,14 +12,15 @@ public class EvenementRemplir extends Evenement {
 	}
 
 	public void execute(Carte carte) {
-        r.remplirReservoir();
+        r.remplirReservoir(carte);
 	}
 
     @Override
     public String toString() {
         return "EvenementRemplir{" +
+				", " +
                 super.toString() +
-                ", Remplissage" +
+				r.toString() +
                 '}';
     }
 }

@@ -171,10 +171,10 @@ public class Simulateur implements Simulable {
 
             int[] posCourante = rbt.getPosition().getCoord();
             int[] posFinale = {lig,col};
-            LinkedList<int[]> tabChemin;
+            LinkedList<int[]> tabChemin = new LinkedList<>();
             rbt.setIdle(false);
 
-            /*
+
             int [] step = {4,3};
             tabChemin.addFirst(step);
             int [] step2 = {5,3};
@@ -186,12 +186,14 @@ public class Simulateur implements Simulable {
             int [] step5 = {7,2};
             tabChemin.addLast(step5);
             int []  step6 = {7,1};
-            tabChemin.addLast(step6)
-            */
+            tabChemin.addLast(step6);
+
 
             int pseudodate = currentdate;
-            Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
-            tabChemin=c.plusCourtChemin();
+            //Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
+            System.out.println("Chemin Done");
+            //tabChemin=c.plusCourtChemin();
+            System.out.println("PCC done");
             ListIterator li = tabChemin.listIterator();
 
             int[] prevcoord = posCourante;
@@ -283,7 +285,7 @@ public class Simulateur implements Simulable {
                 if (rbt.isIdle()) {
                     do {
                         System.out.println();
-                        System.out.println("Que souhaitez vous faire pour le robot situé sur " + rbt.getPosition().toString());
+                        System.out.println("Que souhaitez vous faire pour le robot + " + rbt.toString() + " situé sur " + rbt.getPosition().toString());
                         System.out.println("1) Déplacer le robot");
                         System.out.println("2) Mettre le robot en état occupé (en attendant Intervention Incendie)");
                         System.out.println("3) Mettre le robot en état libre (en attendant Remplissage)");
@@ -302,15 +304,16 @@ public class Simulateur implements Simulable {
                             addEventCoord(rbt, lig, col);
                             break;
                         case 2:
+
                             rbt.setIdle(false);
                             break;
                         case 3:
-                            rbt.setIdle(true);
+                            addEventRemplir(currentdate,rbt);
                             break;
                     }
                 }
                 else {
-                    System.out.println("Ce robot est occupé -- Case : " +rbt.getPosition().toString());
+                    System.out.println("Le robot " + rbt.toString() + " est occupé !");
                 }
             }
             System.out.println("veuillez appuyer sur Suivant");

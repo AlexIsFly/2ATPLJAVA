@@ -13,12 +13,12 @@ public class Drone extends Robots {
     // Quand la vitesse est spécifiée dans le fichier
 
     public Drone (Case caseRobot, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(vitesseTerrainLibre));
+        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(vitesseTerrainLibre), "DRONE");
     }
 
     // Quand la vitesse n'est pas spécifiée
     public Drone(Case caseRobot) {
-        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(100));
+        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(100), "DRONE");
     }
 
     // Constructeur par défaut
@@ -28,11 +28,14 @@ public class Drone extends Robots {
         this.reservoir = new Reservoir(100000, 1800, 10000, 30);
     }
 
-    public void remplirReservoir() {
+    public void remplirReservoir(Carte map) {
         if (this.caseRobot.equalsTerrain("EAU")) {
             this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
+            System.out.println("Remplissage réussi !");
         }
-        System.out.println("Remplissage effectué");
+        else {
+            System.out.println("Le remplissage a échoué !");
+        }
     }
 
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {

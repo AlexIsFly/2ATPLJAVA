@@ -1,5 +1,6 @@
 package robot;
 
+import carte.Carte;
 import carte.Case;
 import enumdata.NatureTerrain;
 
@@ -16,17 +17,20 @@ public class Robots {
     protected Vitesse vitesse;
     protected boolean idle;
     protected static LinkedList<LinkedList<LinkedList<int[]>>> graphe;
+    protected String name = new String();
 
     //constructeur
-    public Robots(Case caseRobot, Reservoir reservoir, Vitesse vitesse) {
+    public Robots(Case caseRobot, Reservoir reservoir, Vitesse vitesse, String pname) {
         this.caseRobot = caseRobot;
         this.reservoir = reservoir;
         this.vitesse = vitesse;
         this.idle = true;
+        this.name = pname;
     }
 
-    public Robots(Case caseRobot) {
+    public Robots(Case caseRobot, String pname) {
         this.caseRobot = caseRobot;
+        this.name = pname;
     }
 
     //constructeur par défaut
@@ -99,14 +103,15 @@ public class Robots {
         System.out.println("Temps pour verser eau : " + temps);
     }
 
-    public void remplirReservoir(){
-        System.out.println("Superclass remplirReservoir");
+    public void remplirReservoir(Carte carte){
+        System.out.println("Ce robot n'a pas besoin de se remplir !");
     }
 
     @Override
     public String toString() {
         return "Robots{" +
-                "position=" + "("+caseRobot.getCoord()[0]+", "+caseRobot.getCoord()[1]+")" +
+                "name=" + name +
+                ", position=" + "("+caseRobot.getCoord()[0]+", "+caseRobot.getCoord()[1]+")" +
                 ", reservoir=" + reservoir.getVolumeCourant() +
                 ", idle=" + idle +
                 '}';

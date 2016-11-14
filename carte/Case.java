@@ -87,11 +87,9 @@ public class Case {
     @Override
     public String toString() {
         return "Case{" +
-                "ligne=" + ligne +
-                ", colonne=" + colonne +
-                ", terrain=" + terrain +
+                "terrain=" + terrain +
                 ", incendie=" + incendie +
-                ", qteEau=" + qteEau +
+                ", intensité=" + qteEau +
                 '}';
     }
 }

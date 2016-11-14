@@ -14,14 +14,15 @@ public class RobotRoues extends Robots {
 
     private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;
 
+
     // Quand la vitesse est spécifiée dans le fichier
     public RobotRoues (Case caseRobot, Reservoir reservoir, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(vitesseTerrainLibre, 0, 0, 0, vitesseTerrainLibre));
+        super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(vitesseTerrainLibre, 0, 0, 0, vitesseTerrainLibre), "ROUES");
     }
 
     // Quand la vitesse n'est pas spécifiée
     public RobotRoues(Case caseRobot) {
-        super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(80, 0, 0, 0, 80));
+        super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(80, 0, 0, 0, 80), "ROUES");
     }
 
     // Constructeur par défaut
@@ -35,15 +36,20 @@ public class RobotRoues extends Robots {
         return RobotRoues.graphe;
     }
 
-    public void remplirReservoir(Carte carte) throws CaseOutOfMapException {
-        if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
-                || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")
-                || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
-                || carte.getVoisin(this.caseRobot, Direction.OUEST).equalsTerrain("EAU")) {
-            this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
-        }
-        else {
-            System.out.println("Le robot ne peut pas remplir son réservoir !");
+    public void remplirReservoir(Carte carte) {
+        try {
+            if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
+                    || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")
+                    || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
+                    || carte.getVoisin(this.caseRobot, Direction.OUEST).equalsTerrain("EAU")) {
+                this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
+            }
+            else {
+                System.out.println("Le remplissage a échoué !");
+            }
+        } catch (CaseOutOfMapException e) {
+            System.out.println("Verification effectuée en dehors");
+            e.printStackTrace();
         }
     }
 

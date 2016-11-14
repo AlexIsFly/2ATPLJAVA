@@ -17,12 +17,12 @@ public class RobotChenilles extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
     public RobotChenilles (Case caseRobot, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(2000, 300, 100, 8), new Vitesse(vitesseTerrainLibre, vitesseTerrainLibre/2, 0, 0, vitesseTerrainLibre));
+        super(caseRobot, new Reservoir(2000, 300, 100, 8), new Vitesse(vitesseTerrainLibre, vitesseTerrainLibre/2, 0, 0, vitesseTerrainLibre), "CHENILLE");
     }
 
     // Quand la vitesse n'est pas spécifiée
     public RobotChenilles(Case caseRobot) {
-        super(caseRobot, new Reservoir(2000, 300, 100, 8), new Vitesse(60, 30, 0, 0, 60));
+        super(caseRobot, new Reservoir(2000, 300, 100, 8), new Vitesse(60, 30, 0, 0, 60), "CHENILLE");
     }
 
     // Constructeur par défaut
@@ -43,9 +43,10 @@ public class RobotChenilles extends Robots {
                     || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
                     || carte.getVoisin(this.caseRobot, Direction.OUEST).equalsTerrain("EAU")) {
                 this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
+                System.out.println("Remplissage réussi !");
             }
             else {
-                System.out.println("Le robot ne peut pas remplir son réservoir !");
+                System.out.println("Le remplissage a échoué !");
             }
         } catch (CaseOutOfMapException e) {
             System.out.println("Verification effectuée en dehors de la carte");
