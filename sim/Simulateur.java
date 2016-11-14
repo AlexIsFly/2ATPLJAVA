@@ -93,6 +93,7 @@ public class Simulateur implements Simulable {
             RobotRoues.creeGraphe(datasim.getCarte());
         }
 
+
         private void createGUI(){
             int dimx = this.datasim.getCarte().getNbColonnes() * 64;
             int dimy = this.datasim.getCarte().getNbLignes() * 64;
@@ -114,7 +115,7 @@ public class Simulateur implements Simulable {
         private void drawCaseIncendie(Case gcase) {
             int x = gcase.getColonne()*64;
             int y = gcase.getLigne() * 64;
-            gui.addGraphicalElement(new ImageElement(x+8,y+8,"src/sprites/fire.png",48,48,null));
+            gui.addGraphicalElement(new ImageElement(x+8,y+8,"sprites/fire.png",48,48,null));
         }
 
         private void drawCaseTerrain(Case gcase) {
@@ -122,20 +123,20 @@ public class Simulateur implements Simulable {
             int y = gcase.getLigne() * 64;
             switch (gcase.getTerrain()) {
                 case FORET:
-                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/forest.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/forest.png",64,64,null));
                     break;
                 case EAU:
-                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/water.gif",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/water.gif",64,64,null));
                     break;
                 case ROCHE:
-                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/rock.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/rock.png",64,64,null));
                     break;
                 case TERRAIN_LIBRE:
-                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/grass.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/grass.png",64,64,null));
                     break;
                 case HABITAT:
-                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/grass.png",64,64,null));
-                    gui.addGraphicalElement(new ImageElement(x+5,y+5,"src/sprites/house.png",54,54,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/grass.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x+5,y+5,"sprites/house.png",54,54,null));
                     break;
             }
         }
@@ -145,16 +146,16 @@ public class Simulateur implements Simulable {
                 int x = roboti.getPosition().getColonne() * 64;
                 int y = roboti.getPosition().getLigne() * 64;
                 if (roboti instanceof Drone){
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/drone.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/drone.png",40,40,null));
                 }
                 else if(roboti instanceof RobotChenilles) {
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/tracks.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/tracks.png",40,40,null));
                 }
                 else if(roboti instanceof RobotRoues) {
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/wheels.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/wheels.png",40,40,null));
                 }
                 else if(roboti instanceof RobotPattes) {
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/legs.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/legs.png",40,40,null));
                 }
                 else {
                     System.out.println("erreur dessin robot");
@@ -173,6 +174,14 @@ public class Simulateur implements Simulable {
             int[] posFinale = {lig,col};
             LinkedList<int[]> tabChemin;
             rbt.setIdle(false);
+
+            LinkedList<LinkedList<LinkedList<int[]>>> grapheT = rbt.getGraphe();
+            // Si la case est inacessible
+            if (grapheT.get(lig).get(col).size() == 0) {
+                System.out.println("Case inacessible");
+                rbt.setIdle(true);
+                return;
+            }
 
             int pseudodate = currentdate;
             Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
@@ -210,17 +219,17 @@ public class Simulateur implements Simulable {
                             case 0:
                                 System.out.println("ERREUR planification déplacement");
                                 rbt.setIdle(true);
-                               // return;
+                                return;
                             default:
                                 System.out.println("ERREUR planification déplacement");
                                 rbt.setIdle(true);
-                               // return;
+                                return;
                         }
                         break;
                     default:
                         System.out.println("ERREUR planification déplacement");
                         rbt.setIdle(true);
-                        //return;
+                        return;
                 }
                 prevcoord = suivcoord;
                 pseudodate++;
@@ -302,7 +311,7 @@ public class Simulateur implements Simulable {
                     System.out.println("Le robot " + rbt.toString() + " est occupé !");
                 }
             }
-            System.out.println("veuillez appuyer sur Suivant");
+            System.out.println("Veuillez appuyer sur Suivant");
             System.out.println();
         }
 }
