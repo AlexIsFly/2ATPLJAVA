@@ -157,7 +157,10 @@ public class Chemin {
             coordCourante[0] = tempLigne;
             coordCourante[1] = tempColonne;
             System.out.println("Ce qu'on ajoute dans chemin " + coordCourante[0] + " " + coordCourante[1]);
-            chemin.addFirst(coordCourante);
+            int[] tempt = new int[2];
+            tempt[0] = coordCourante[0];
+            tempt[1] = coordCourante[1];
+            chemin.addFirst(tempt);
         }
         chemin.removeFirst();
         return chemin;
