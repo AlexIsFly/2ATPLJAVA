@@ -139,7 +139,8 @@ public class Chemin {
         int tempColonne;
         coordCourante[0] = this.coordCaseArrivee[0];
         coordCourante[1] = this.coordCaseArrivee[1];
-        chemin.add(coordCaseArrivee);
+        System.out.println("Ce qu'on ajoute dans chemin " + coordCourante[0] + " " + coordCourante[1]);
+        chemin.addFirst(coordCaseArrivee);
         System.out.println("plusCourtChemin après addChemin");
         // Tant que les coordonnées de la case de départ ne sont pas atteintes ou que le père de la case courante n'existe pas
         while (!(this.coordCaseDepart[0] == coordCourante[0] && this.coordCaseDepart[1] == coordCourante[1])) {
@@ -151,11 +152,14 @@ public class Chemin {
             System.out.println("CoordCourante : " + coordCourante[0] + coordCourante[1] + " Tab_antecedents : "
                     + tab_antecedents[coordCourante[0]][coordCourante[1]][0]
                     + tab_antecedents[coordCourante[0]][coordCourante[1]][1]);
-            coordCourante[0] = tab_antecedents[coordCourante[0]][coordCourante[1]][0];
-            coordCourante[1] = tab_antecedents[coordCourante[0]][coordCourante[1]][1];
+            tempLigne = tab_antecedents[coordCourante[0]][coordCourante[1]][0];
+            tempColonne = tab_antecedents[coordCourante[0]][coordCourante[1]][1];
+            coordCourante[0] = tempLigne;
+            coordCourante[1] = tempColonne;
             System.out.println("Ce qu'on ajoute dans chemin " + coordCourante[0] + " " + coordCourante[1]);
             chemin.addFirst(coordCourante);
         }
+        chemin.removeFirst();
         return chemin;
     }
 
