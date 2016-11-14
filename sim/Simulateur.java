@@ -174,21 +174,6 @@ public class Simulateur implements Simulable {
             LinkedList<int[]> tabChemin;
             rbt.setIdle(false);
 
-            /*
-            int [] step = {4,3};
-            tabChemin.addFirst(step);
-            int [] step2 = {5,3};
-            tabChemin.addLast(step2);
-            int [] step3 = {5,2};
-            tabChemin.addLast(step3);
-            int [] step4 = {6,2};
-            tabChemin.addLast(step4);
-            int [] step5 = {7,2};
-            tabChemin.addLast(step5);
-            int []  step6 = {7,1};
-            tabChemin.addLast(step6);
-            */
-
             int pseudodate = currentdate;
             Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
             System.out.println("Chemin Done");
@@ -199,15 +184,9 @@ public class Simulateur implements Simulable {
             int[] prevcoord = posCourante;
             int[] suivcoord;
 
-            while (li.hasNext()) {
-                suivcoord = (int[]) li.next();
-                System.out.println("BEFORE : Le chemin emprunté sera : ");
-                System.out.println("ligne : " + suivcoord[0] + " | colonne : " + suivcoord[1]);
-            }
-
             while (li.hasNext()){
                 suivcoord = (int [])li.next();
-                System.out.println("AFTER : Le chemin emprunté sera : ");
+                System.out.println("Le chemin emprunté sera : ");
                 System.out.println("ligne : "+ suivcoord[0] + " | colonne : " + suivcoord[1]);
                 //on regarde si on doit se déplacer verticalement
                 System.out.println("valeur : " + (suivcoord[0] - prevcoord[0]));
