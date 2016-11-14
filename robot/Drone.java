@@ -67,28 +67,28 @@ public class Drone extends Robots {
                 if (coord[0] != 0) {
                     voisinNord[0] = coord[0] - 1;
                     voisinNord[1] = coord[1];
-                    voisinNord[2] = 10000/100;
+                    voisinNord[2] = 10000/(int)this.vitesse.getVitesseTerrainLibre();
                     graphe.get(i).get(j).add(voisinNord);
                 }
                 // Si on n'est pas sur le bord sud
                 if (coord[0] != carte.getNbLignes()-1) {
                     voisinSud[0] = coord[0] + 1;
                     voisinSud[1] = coord[1];
-                    voisinSud[2] = 10000/100;
+                    voisinSud[2] = 10000/(int)this.vitesse.getVitesseTerrainLibre();
                     graphe.get(i).get(j).add(voisinSud);
                 }
                 // Si on n'est pas sur le bord droit
                 if (coord[1] != carte.getNbColonnes()-1) {
                     voisinEst[0] = coord[0];
                     voisinEst[1] = coord[1] + 1;
-                    voisinEst[2] = 10000/100;
+                    voisinEst[2] = 10000/(int)this.vitesse.getVitesseTerrainLibre();
                     graphe.get(i).get(j).add(voisinEst);
                 }
                 // Si on n'est pas sur le bord gauche
                 if (coord[1] != 0) {
                     voisinOuest[0] = coord[0];
                     voisinOuest[1] = coord[1] - 1;
-                    voisinOuest[2] = 10000/100;
+                    voisinOuest[2] = 10000/(int)this.vitesse.getVitesseTerrainLibre();
                     graphe.get(i).get(j).add(voisinOuest);
                 }
             }

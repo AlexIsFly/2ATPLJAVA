@@ -84,13 +84,13 @@ public class RobotChenilles extends Robots {
                         voisinNord[0] = coord[0] - 1;
                         voisinNord[1] = coord[1];
                         if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("TERRAIN_LIBRE")) {
-                            voisinNord[2] = 10000 / 60;
+                            voisinNord[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinNord);
                         } else if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("FORET")) {
-                            voisinNord[2] = 10000 / 30;
+                            voisinNord[2] = 10000 / (int)this.vitesse.getVitesseForet();
                             graphe.get(i).get(j).add(voisinNord);
                         } else if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("HABITAT")) {
-                            voisinNord[2] = 10000 / 60;
+                            voisinNord[2] = 10000 / (int)this.vitesse.getVitesseHabitat();
                             graphe.get(i).get(j).add(voisinNord);
                         }
                     }
@@ -99,13 +99,13 @@ public class RobotChenilles extends Robots {
                         voisinSud[0] = coord[0] + 1;
                         voisinSud[1] = coord[1];
                         if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("TERRAIN_LIBRE")) {
-                            voisinSud[2] = 10000 / 60;
+                            voisinSud[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinSud);
                         } else if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("FORET")) {
-                            voisinSud[2] = 10000 / 30;
+                            voisinSud[2] = 10000 / (int)this.vitesse.getVitesseForet();
                             graphe.get(i).get(j).add(voisinSud);
                         } else if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("HABITAT")) {
-                            voisinSud[2] = 10000 / 60;
+                            voisinSud[2] = 10000 / (int)this.vitesse.getVitesseHabitat();
                             graphe.get(i).get(j).add(voisinSud);
                         }
                     }
@@ -115,10 +115,10 @@ public class RobotChenilles extends Robots {
                         voisinEst[1] = coord[1] + 1;
                         if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("HABITAT")) {
-                            voisinEst[2] = 10000 / 60;
+                            voisinEst[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinEst);
                         } else if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("FORET")) {
-                            voisinEst[2] = 10000 / 30;
+                            voisinEst[2] = 10000 / (int)this.vitesse.getVitesseForet();
                             graphe.get(i).get(j).add(voisinEst);
                         }
                     }
@@ -128,10 +128,10 @@ public class RobotChenilles extends Robots {
                         voisinOuest[1] = coord[1] - 1;
                         if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("HABITAT")) {
-                            voisinOuest[2] = 10000 / 60;
+                            voisinOuest[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinOuest);
                         } else if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("FORET")) {
-                            voisinOuest[2] = 10000 / 60;
+                            voisinOuest[2] = 10000 / (int)this.vitesse.getVitesseForet();
                             graphe.get(i).get(j).add(voisinOuest);
                         }
                     }

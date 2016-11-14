@@ -80,7 +80,7 @@ public class RobotRoues extends Robots {
                     if (coord[0] != 0) {
                         voisinNord[0] = coord[0] - 1;
                         voisinNord[1] = coord[1];
-                        voisinNord[2] = 10000 / 80;
+                        voisinNord[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                         if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("HABITAT")) {
                             graphe.get(i).get(j).add(voisinNord);
@@ -90,7 +90,7 @@ public class RobotRoues extends Robots {
                     if (coord[0] != carte.getNbLignes() - 1) {
                         voisinSud[0] = coord[0] + 1;
                         voisinSud[1] = coord[1];
-                        voisinSud[2] = 10000 / 80;
+                        voisinSud[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                         if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("HABITAT")) {
                             graphe.get(i).get(j).add(voisinSud);
@@ -100,7 +100,7 @@ public class RobotRoues extends Robots {
                     if (coord[1] != carte.getNbColonnes() - 1) {
                         voisinEst[0] = coord[0];
                         voisinEst[1] = coord[1] + 1;
-                        voisinEst[2] = 10000 / 80;
+                        voisinEst[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                         if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("HABITAT")) {
                             graphe.get(i).get(j).add(voisinEst);
@@ -110,7 +110,7 @@ public class RobotRoues extends Robots {
                     if (coord[1] != 0) {
                         voisinOuest[0] = coord[0];
                         voisinOuest[1] = coord[1] - 1;
-                        voisinOuest[2] = 10000 / 80;
+                        voisinOuest[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                         if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("HABITAT")) {
                             graphe.get(i).get(j).add(voisinOuest);

@@ -62,10 +62,10 @@ public class RobotPattes extends Robots {
                         if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("FORET")
                                 || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("HABITAT")) {
-                            voisinNord[2] = 10000 / 30;
+                            voisinNord[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinNord);
                         } else if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("ROCHE")) {
-                            voisinNord[2] = 10000 / 10;
+                            voisinNord[2] = 10000 / (int)this.vitesse.getVitesseRoche();
                             graphe.get(i).get(j).add(voisinNord);
                         }
 
@@ -77,10 +77,10 @@ public class RobotPattes extends Robots {
                         if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("FORET")
                                 || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("HABITAT")) {
-                            voisinSud[2] = 10000 / 30;
+                            voisinSud[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinSud);
                         } else if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("ROCHE")) {
-                            voisinSud[2] = 10000 / 10;
+                            voisinSud[2] = 10000 / (int)this.vitesse.getVitesseRoche();
                             graphe.get(i).get(j).add(voisinSud);
                         }
                     }
@@ -91,10 +91,10 @@ public class RobotPattes extends Robots {
                         if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("FORET")
                                 || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("HABITAT")) {
-                            voisinEst[2] = 10000 / 30;
+                            voisinEst[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinEst);
                         } else if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("ROCHE")) {
-                            voisinEst[2] = 10000 / 10;
+                            voisinEst[2] = 10000 / (int)this.vitesse.getVitesseRoche();
                             graphe.get(i).get(j).add(voisinEst);
                         }
                     }
@@ -105,10 +105,10 @@ public class RobotPattes extends Robots {
                         if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("TERRAIN_LIBRE")
                                 || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("FORET")
                                 || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("HABITAT")) {
-                            voisinOuest[2] = 10000 / 30;
+                            voisinOuest[2] = 10000 / (int)this.vitesse.getVitesseTerrainLibre();
                             graphe.get(i).get(j).add(voisinOuest);
                         } else if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("ROCHE")) {
-                            voisinOuest[2] = 10000 / 10;
+                            voisinOuest[2] = 10000 / (int)this.vitesse.getVitesseRoche();
                             graphe.get(i).get(j).add(voisinOuest);
                         }
                     }
