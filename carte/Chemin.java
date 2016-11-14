@@ -142,7 +142,7 @@ public class Chemin {
         chemin.add(coordCaseArrivee);
         System.out.println("plusCourtChemin après addChemin");
         // Tant que les coordonnées de la case de départ ne sont pas atteintes ou que le père de la case courante n'existe pas
-        while ((this.coordCaseDepart[0] != coordCourante[0] && this.coordCaseDepart[1] != coordCourante[1])) {
+        while (!(this.coordCaseDepart[0] == coordCourante[0] && this.coordCaseDepart[1] == coordCourante[1])) {
             if (tab_antecedents[coordCourante[0]][coordCourante[1]][0] == -1) {
                 System.out.println("Le chemin n'existe pas !");
                 return null;
