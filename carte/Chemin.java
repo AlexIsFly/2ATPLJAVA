@@ -27,6 +27,14 @@ public class Chemin {
         this.nbColonnes = nbColonnes;
         this.tab_poids = new int[nbLignes][nbColonnes][2];
         this.tab_antecedents = new int[nbLignes][nbColonnes][2];
+
+        // Initialisation du tableau antécédents
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                this.tab_antecedents[i][j][0] = -1;
+                this.tab_antecedents[i][j][1] = -1;
+            }
+        }
     }
 
     public Chemin() {
@@ -45,11 +53,11 @@ public class Chemin {
         // On met la valeur du poids de la case de départ à 0 et tous les autres très grandes
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                if ((this.coordCaseDepart[0] == i) && (this.coordCaseDepart[1] == j)) {
-                    this.tab_poids[i][j][2] = 0;
+                if (this.coordCaseDepart[0] == i && this.coordCaseDepart[1] == j) {
+                    this.tab_poids[i][j][1] = 0;
                 }
                 else {
-                    this.tab_poids[i][j][2] = 100000000;
+                    this.tab_poids[i][j][1] = 100000000;
                 }
             }
         }
@@ -65,7 +73,10 @@ public class Chemin {
         caseCour[1] = this.coordCaseDepart[1];
         caseCour[2] = 100000000;
 
-        while (caseCour[0] != this.coordCaseArrivee[0] && caseCour[1] != this.coordCaseArrivee[1]) {
+        // Recherche du noeud de poids le + faible non marqué
+        // Si ce noeud est la case d'arrivée, on arrête l'algo
+        boolean done = false;
+        while (done == false) {
             for (int i = 0; i < nbLignes; i++) {
                 for (int j = 0; j < nbColonnes; j++) {
                     if (this.tab_poids[i][j][1] == 0 && caseCour[2] > this.tab_poids[i][j][0]) {
@@ -75,17 +86,31 @@ public class Chemin {
                     }
                 }
             }
-            // On a trouvé la case non marquée avec le poids minimal (caseCour), on regarde ses fils et on met à jour le poids
-            Iterator itr = this.graphe.get(caseCour[0]).get(caseCour[1]).iterator();
-            while (itr.hasNext()) {
-                // On regarde chaque fils
-                int[] fils = new int[3];
-                fils = (int[])itr.next();
-                // On regarde si le fils n'est pas marqué
-                if (tab_antecedents[fils[0]][fils[1]][1] == 0) {
-
+            if (caseCour[0] != this.coordCaseArrivee[0] && caseCour[1] != this.coordCaseArrivee[1]) {
+                // On a trouvé la case non marquée avec le poids minimal (caseCour), on regarde ses fils et on met à jour le poids
+                Iterator itr = this.graphe.get(caseCour[0]).get(caseCour[1]).iterator();
+                while (itr.hasNext()) {
+                    // On regarde chaque fils
+                    int[] liaisonFils = new int[3];
+                    liaisonFils = (int[]) itr.next();
+                    // On regarde si le fils n'est pas marqué, on met à jour son poids
+                    if (tab_antecedents[liaisonFils[0]][liaisonFils[1]][1] == 0) {
+                        // Si poids père + poids liaison père-fils < poids fils
+                        // Alors Poids fils = poids père + poids liaison père-fils
+                        if (tab_poids[caseCour[0]][caseCour[1]][0] + liaisonFils[2] < tab_poids[liaisonFils[0]][liaisonFils[1]][0]) {
+                            tab_poids[liaisonFils[0]][liaisonFils[1]][0] = tab_poids[caseCour[0]][caseCour[1]][0] + liaisonFils[2];
+                        }
+                        // On met à jour le tableau des antécédents, l'antécédent de la case (i, j) devient le père
+                        tab_antecedents[liaisonFils[0]][liaisonFils[1]][0] = caseCour[0];
+                        tab_antecedents[liaisonFils[0]][liaisonFils[1]][1] = caseCour[1];
+                    }
+                    itr.next();
                 }
-                itr.next();
+                // On marque la case
+                this.tab_poids[caseCour[0]][caseCour[1]][1] = 1;
+            }
+            else {
+                done = true;
             }
         }
 
@@ -103,7 +128,7 @@ public class Chemin {
         chemin.add(coordCaseArrivee);
         // Tant que les coordonnées de la case de départ ne sont pas atteintes ou que le père de la case courante n'existe pas
         while ((this.coordCaseDepart[0] != coordCourante[0] && this.coordCaseDepart[1] != coordCourante[1])) {
-            if (tab_antecedents[coordCourante[0]][coordCourante[1]] == null) {
+            if (tab_antecedents[coordCourante[0]][coordCourante[1]][0] == -1) {
                 System.out.println("Le chemin n'existe pas !");
                 return null;
             }
