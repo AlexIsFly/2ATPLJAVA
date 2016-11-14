@@ -13,19 +13,19 @@ public class Drone extends Robots {
     // Quand la vitesse est spécifiée dans le fichier
 
     public Drone (Case caseRobot, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(vitesseTerrainLibre), "DRONE");
+        super(caseRobot, new Reservoir(100000, 15, 10000, 1), new Vitesse(vitesseTerrainLibre), "DRONE");
     }
 
     // Quand la vitesse n'est pas spécifiée
     public Drone(Case caseRobot) {
-        super(caseRobot, new Reservoir(100000, 1800, 10000, 30), new Vitesse(100), "DRONE");
+        super(caseRobot, new Reservoir(100000, 15, 10000, 1), new Vitesse(100), "DRONE");
     }
 
     // Constructeur par défaut
     public Drone() {
         super();
         this.vitesse = new Vitesse(100);
-        this.reservoir = new Reservoir(100000, 1800, 10000, 30);
+        this.reservoir = new Reservoir(100000, 15, 10000, 1);
     }
 
     public void remplirReservoir(Carte map) {
@@ -95,49 +95,4 @@ public class Drone extends Robots {
         }
     }
 
-    /*
-
-    public static LinkedList<int[]> getCoordVoisins(int []coord, Carte carte) {
-
-        // Drone peut se déplacer sur tous les terrains
-
-        LinkedList<int[]> al = new LinkedList<int[]>();
-
-        int[] voisinNord = new int[3];
-        int[] voisinSud = new int[3];
-        int[] voisinOuest = new int[3];
-        int[] voisinEst = new int[3];
-
-        // Si on n'est pas sur le bord haut
-        if (coord[0] != 0) {
-            voisinNord[0] = coord[0] - 1;
-            voisinNord[1] = coord[1];
-            voisinNord[2] = 1;
-            al.add(voisinNord);
-        }
-        // Si on n'est pas sur le bord sud
-        if (coord[0] != carte.getNbLignes()-1) {
-            voisinSud[0] = coord[0] + 1;
-            voisinSud[1] = coord[1];
-            voisinSud[2] = 1;
-            al.add(voisinSud);
-        }
-        // Si on n'est pas sur le bord droit
-        if (coord[1] != carte.getNbColonnes()-1) {
-            voisinEst[0] = coord[0];
-            voisinEst[1] = coord[1] + 1;
-            voisinEst[2] = 1;
-            al.add(voisinEst);
-        }
-        // Si on n'est pas sur le bord gauche
-        if (coord[1] != 0) {
-            voisinOuest[0] = coord[0];
-            voisinOuest[1] = coord[1] - 1;
-            voisinOuest[2] = 1;
-            al.add(voisinOuest);
-        }
-        return al;
-    }
-
-    */
 }

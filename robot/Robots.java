@@ -35,7 +35,6 @@ public class Robots {
 
     //constructeur par défaut
     public Robots() {
-        //constructeur par défaut de Case (coord (0,0), type EAU, pas d'incendie)
         this.caseRobot = new Case();
     }
 
@@ -82,10 +81,8 @@ public class Robots {
         return 0;
     }
 
+    /*
     public void deverserEau(int volume)  {
-        // Décrémenter le volume du robot mais aussi décrémenter l'incendie : attendre DORR
-        // Dire également le temps que ça a mis à verser l'eau
-        double temps;
 
         if (this.reservoir.getVolumeCourant() < 1000000000) {
             if (this.reservoir.getVolumeCourant() - volume >= 0) {
@@ -102,6 +99,7 @@ public class Robots {
 
         System.out.println("Temps pour verser eau : " + temps);
     }
+    */
 
     public void remplirReservoir(Carte carte){
         System.out.println("Ce robot n'a pas besoin de se remplir !");
@@ -134,7 +132,7 @@ public class Robots {
             posCourante[1]=tabChemin(i)[1];
             i++;
         }
-        sim.addEventArrive(d,this, coordArrivee[0], coordArrivee[1]);
+        sim.addEventTermine(d,this, coordArrivee[0], coordArrivee[1]);
         System.out.println("Le robot est arrivé à la case (" + posCourante[0] + ";" + posCourante[1]+") ");
     }
 

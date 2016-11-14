@@ -3,10 +3,10 @@ package evenement;
 import carte.Carte;
 import robot.Robots;
 
-public class EvenementArrive extends Evenement {
+public class EvenementTermine extends Evenement {
 	private Robots r ;
 
-	public EvenementArrive(int date, Robots rob) {
+	public EvenementTermine(int date, Robots rob) {
 		super(date);
 		this.r = rob;
 	}
@@ -18,7 +18,7 @@ public class EvenementArrive extends Evenement {
 
     @Override
     public String toString() {
-        return "EvenementArrive{" +
+        return "EvenementTermine{" +
                 super.toString() +
                 ", " +
                 r.toString() +

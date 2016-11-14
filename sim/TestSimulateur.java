@@ -17,6 +17,6 @@ public class TestSimulateur {
 
         //la methode getaRobot permet d'obtenir un robot dans la liste des robots
         //sim.addEventDirection(1,sim.getaRobot(0),Direction.NORD);
-        //sim.addEventArrive(1,sim.getaRobot(0));
+        //sim.addEventTermine(1,sim.getaRobot(0));
     }
 }

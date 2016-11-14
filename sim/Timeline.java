@@ -1,7 +1,7 @@
 package sim;
 
 import evenement.Evenement;
-import evenement.EvenementArrive;
+import evenement.EvenementTermine;
 import io.DonneesSimulation;
 
 import java.util.LinkedList;
@@ -41,7 +41,7 @@ public class Timeline {
             ListIterator li = dateL.get(date).listIterator();
             while (li.hasNext()){
                 Evenement eventshow = (Evenement)li.next();
-                if (!(eventshow instanceof EvenementArrive)) {
+                if (!(eventshow instanceof EvenementTermine)) {
                     System.out.println(eventshow.toString() + " PRÉVU");
                 }
             }

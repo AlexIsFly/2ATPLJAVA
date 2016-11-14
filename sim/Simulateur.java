@@ -2,7 +2,6 @@ package sim;
 
 import carte.Case;
 import carte.Chemin;
-import carte.GrapheRobots;
 import enumdata.Direction;
 import evenement.*;
 import gui.GUISimulator;
@@ -66,6 +65,8 @@ public class Simulateur implements Simulable {
             drawRobots();
             currentdate++;
             demandeUtilisateur();
+            drawTerrain();
+            drawRobots();
         }
 
         @Override
@@ -87,12 +88,7 @@ public class Simulateur implements Simulable {
         }
 
         private void fillGrapheRobots(){
-            Drone.creeGraphe(datasim.getCarte());
-            RobotChenilles.creeGraphe(datasim.getCarte());
-            RobotPattes.creeGraphe(datasim.getCarte());
-            RobotRoues.creeGraphe(datasim.getCarte());
         }
-
 
         private void createGUI(){
             int dimx = this.datasim.getCarte().getNbColonnes() * 64;
@@ -115,7 +111,7 @@ public class Simulateur implements Simulable {
         private void drawCaseIncendie(Case gcase) {
             int x = gcase.getColonne()*64;
             int y = gcase.getLigne() * 64;
-            gui.addGraphicalElement(new ImageElement(x+8,y+8,"sprites/fire.png",48,48,null));
+            gui.addGraphicalElement(new ImageElement(x+8,y+8,"src/sprites/fire.png",48,48,null));
         }
 
         private void drawCaseTerrain(Case gcase) {
@@ -123,20 +119,20 @@ public class Simulateur implements Simulable {
             int y = gcase.getLigne() * 64;
             switch (gcase.getTerrain()) {
                 case FORET:
-                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/forest.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/forest.png",64,64,null));
                     break;
                 case EAU:
-                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/water.gif",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/water.gif",64,64,null));
                     break;
                 case ROCHE:
-                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/rock.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/rock.png",64,64,null));
                     break;
                 case TERRAIN_LIBRE:
-                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/grass.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/grass.png",64,64,null));
                     break;
                 case HABITAT:
-                    gui.addGraphicalElement(new ImageElement(x,y,"sprites/grass.png",64,64,null));
-                    gui.addGraphicalElement(new ImageElement(x+5,y+5,"sprites/house.png",54,54,null));
+                    gui.addGraphicalElement(new ImageElement(x,y,"src/sprites/grass.png",64,64,null));
+                    gui.addGraphicalElement(new ImageElement(x+5,y+5,"src/sprites/house.png",54,54,null));
                     break;
             }
         }
@@ -146,16 +142,16 @@ public class Simulateur implements Simulable {
                 int x = roboti.getPosition().getColonne() * 64;
                 int y = roboti.getPosition().getLigne() * 64;
                 if (roboti instanceof Drone){
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/drone.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/drone.png",40,40,null));
                 }
                 else if(roboti instanceof RobotChenilles) {
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/tracks.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/tracks.png",40,40,null));
                 }
                 else if(roboti instanceof RobotRoues) {
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/wheels.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/wheels.png",40,40,null));
                 }
                 else if(roboti instanceof RobotPattes) {
-                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"sprites/legs.png",40,40,null));
+                    gui.addGraphicalElement(new ImageElement(x+12, y+12,"src/sprites/legs.png",40,40,null));
                 }
                 else {
                     System.out.println("erreur dessin robot");
@@ -178,7 +174,7 @@ public class Simulateur implements Simulable {
             LinkedList<LinkedList<LinkedList<int[]>>> grapheT = rbt.getGraphe();
             // Si la case est inacessible
             if (grapheT.get(lig).get(col).size() == 0) {
-                System.out.println("Case inacessible");
+                System.out.println("Case inaccessible");
                 rbt.setIdle(true);
                 return;
             }
@@ -235,22 +231,21 @@ public class Simulateur implements Simulable {
                 pseudodate++;
             }
             //on sort donc on a parcouru tout tabChemein, on peut créer l'evenement d'arrivée
-            addEventArrive(pseudodate,rbt);
+            addEventTermine(pseudodate,rbt);
         }
 
-        public void addEventArrive(int date, Robots r) {
-            EvenementArrive event = new EvenementArrive(date,r);
+        public void addEventTermine(int date, Robots r) {
+            EvenementTermine event = new EvenementTermine(date,r);
             timeline.addEvent(event);
         }
 
-        public void addEventRemplir(int date, Robots r) {
-            EvenementRemplir event = new EvenementRemplir(date,r);
+        public void addEventRemplir(Robots r) {
+
+            EvenementRemplir event = new EvenementRemplir(currentdate + r.getReservoir().getTempsIntervention(),r);
             timeline.addEvent(event);
         }
 
         public void addEventIntervention(int date, Robots r) {
-            EvenementIntervention event = new EvenementIntervention(date, r);
-            timeline.addEvent(event);
         }
 
         public void showEvents(int date) {
@@ -303,7 +298,7 @@ public class Simulateur implements Simulable {
                             rbt.setIdle(false);
                             break;
                         case 3:
-                            addEventRemplir(currentdate,rbt);
+                            addEventRemplir(rbt);
                             break;
                     }
                 }

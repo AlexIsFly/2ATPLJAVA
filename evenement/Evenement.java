@@ -6,7 +6,7 @@ import carte.Carte;
  * Created by alexisgacel on 30/10/2016.
  * For Project Java ISSC - IMAG 2016
  */
-public class Evenement {
+abstract public class Evenement {
     protected int date;
 
     public Evenement(int date) {

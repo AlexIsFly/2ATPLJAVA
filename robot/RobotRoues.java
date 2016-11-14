@@ -17,19 +17,19 @@ public class RobotRoues extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
     public RobotRoues (Case caseRobot, Reservoir reservoir, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(vitesseTerrainLibre, 0, 0, 0, vitesseTerrainLibre), "ROUES");
+        super(caseRobot, new Reservoir(5000, 5, 2500, 1), new Vitesse(vitesseTerrainLibre, 0, 0, 0, vitesseTerrainLibre), "ROUES");
     }
 
     // Quand la vitesse n'est pas spécifiée
     public RobotRoues(Case caseRobot) {
-        super(caseRobot, new Reservoir(5000, 600, 100, 5), new Vitesse(80, 0, 0, 0, 80), "ROUES");
+        super(caseRobot, new Reservoir(5000, 5, 2500, 1), new Vitesse(80, 0, 0, 0, 80), "ROUES");
     }
 
     // Constructeur par défaut
     public RobotRoues() {
         super();
         this.vitesse = new Vitesse(80, 0, 0, 0, 80);
-        this.reservoir = new Reservoir(5000, 600, 100, 5);
+        this.reservoir = new Reservoir(5000, 5, 2500, 1);
     }
 
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
