@@ -88,6 +88,9 @@ public class Simulateur implements Simulable {
         }
 
         private void fillGrapheRobots(){
+            for(Robots roboti : this.datasim.getRobotL()) {
+                roboti.creeGraphe(this.datasim.getCarte());
+            }
         }
 
         private void createGUI(){
