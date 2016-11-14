@@ -39,10 +39,10 @@ public class Drone extends Robots {
     }
 
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return Drone.graphe;
+        return this.graphe;
     }
 
-    public static void creeGraphe(Carte carte) {
+    public void creeGraphe(Carte carte) {
         graphe = new LinkedList<LinkedList<LinkedList<int[]>>>();
 
         //Initialisation du tableau 2D

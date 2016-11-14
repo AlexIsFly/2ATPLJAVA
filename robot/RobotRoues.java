@@ -33,7 +33,7 @@ public class RobotRoues extends Robots {
     }
 
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return RobotRoues.graphe;
+        return this.graphe;
     }
 
     public void remplirReservoir(Carte carte) {
@@ -53,7 +53,7 @@ public class RobotRoues extends Robots {
         }
     }
 
-    public static void creeGraphe(Carte carte) {
+    public void creeGraphe(Carte carte) {
         graphe = new LinkedList<LinkedList<LinkedList<int[]>>>();
 
         //Initialisation du tableau 2D
@@ -74,44 +74,47 @@ public class RobotRoues extends Robots {
                 int[] voisinOuest = new int[3];
                 int[] voisinEst = new int[3];
 
-                // Si on n'est pas sur le bord haut
-                if (coord[0] != 0) {
-                    voisinNord[0] = coord[0] - 1;
-                    voisinNord[1] = coord[1];
-                    voisinNord[2] = 10000 / 80;
-                    if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("TERRAIN_LIBRE")
-                            || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("HABITAT")) {
-                        graphe.get(i).get(j).add(voisinNord);
+                if (carte.getCase(coord[0], coord[1]).equalsTerrain("TERRAIN_LIBRE")
+                        || carte.getCase(coord[0], coord[1]).equalsTerrain("HABITAT")) {
+                    // Si on n'est pas sur le bord haut
+                    if (coord[0] != 0) {
+                        voisinNord[0] = coord[0] - 1;
+                        voisinNord[1] = coord[1];
+                        voisinNord[2] = 10000 / 80;
+                        if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("TERRAIN_LIBRE")
+                                || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("HABITAT")) {
+                            graphe.get(i).get(j).add(voisinNord);
+                        }
                     }
-                }
-                // Si on n'est pas sur le bord sud
-                if (coord[0] != carte.getNbLignes() - 1) {
-                    voisinSud[0] = coord[0] + 1;
-                    voisinSud[1] = coord[1];
-                    voisinSud[2] = 10000 / 80;
-                    if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("TERRAIN_LIBRE")
-                            || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("HABITAT")) {
-                        graphe.get(i).get(j).add(voisinSud);
+                    // Si on n'est pas sur le bord sud
+                    if (coord[0] != carte.getNbLignes() - 1) {
+                        voisinSud[0] = coord[0] + 1;
+                        voisinSud[1] = coord[1];
+                        voisinSud[2] = 10000 / 80;
+                        if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("TERRAIN_LIBRE")
+                                || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("HABITAT")) {
+                            graphe.get(i).get(j).add(voisinSud);
+                        }
                     }
-                }
-                // Si on n'est pas sur le bord droit
-                if (coord[1] != carte.getNbColonnes() - 1) {
-                    voisinEst[0] = coord[0];
-                    voisinEst[1] = coord[1] + 1;
-                    voisinEst[2] = 10000 / 80;
-                    if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("TERRAIN_LIBRE")
-                            || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("HABITAT")) {
-                        graphe.get(i).get(j).add(voisinEst);
+                    // Si on n'est pas sur le bord droit
+                    if (coord[1] != carte.getNbColonnes() - 1) {
+                        voisinEst[0] = coord[0];
+                        voisinEst[1] = coord[1] + 1;
+                        voisinEst[2] = 10000 / 80;
+                        if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("TERRAIN_LIBRE")
+                                || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("HABITAT")) {
+                            graphe.get(i).get(j).add(voisinEst);
+                        }
                     }
-                }
-                // Si on n'est pas sur le bord gauche
-                if (coord[1] != 0) {
-                    voisinOuest[0] = coord[0];
-                    voisinOuest[1] = coord[1] - 1;
-                    voisinOuest[2] = 10000 / 80;
-                    if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("TERRAIN_LIBRE")
-                            || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("HABITAT")) {
-                        graphe.get(i).get(j).add(voisinOuest);
+                    // Si on n'est pas sur le bord gauche
+                    if (coord[1] != 0) {
+                        voisinOuest[0] = coord[0];
+                        voisinOuest[1] = coord[1] - 1;
+                        voisinOuest[2] = 10000 / 80;
+                        if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("TERRAIN_LIBRE")
+                                || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("HABITAT")) {
+                            graphe.get(i).get(j).add(voisinOuest);
+                        }
                     }
                 }
             }

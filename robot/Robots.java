@@ -106,7 +106,9 @@ public class Robots {
     public void remplirReservoir(Carte carte){
         System.out.println("Ce robot n'a pas besoin de se remplir !");
     }
-
+    public void creeGraphe(Carte carte) {
+        System.out.println("Super-méthode creeGraphe");
+    }
     @Override
     public String toString() {
         return "Robots{" +
