@@ -17,19 +17,19 @@ public class RobotChenilles extends Robots {
 
     // Quand la vitesse est spécifiée dans le fichier
     public RobotChenilles (Case caseRobot, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(2000, 3, 1100, 1), new Vitesse(vitesseTerrainLibre, vitesseTerrainLibre/2, 0, 0, vitesseTerrainLibre), "CHENILLE");
+        super(caseRobot, new Reservoir(2000, 3, 2000, 2), new Vitesse(vitesseTerrainLibre, vitesseTerrainLibre/2, 0, 0, vitesseTerrainLibre), "CHENILLE");
     }
 
     // Quand la vitesse n'est pas spécifiée
     public RobotChenilles(Case caseRobot) {
-        super(caseRobot, new Reservoir(2000, 3, 1100, 1), new Vitesse(60, 30, 0, 0, 60), "CHENILLE");
+        super(caseRobot, new Reservoir(2000, 3, 2000, 2), new Vitesse(60, 30, 0, 0, 60), "CHENILLE");
     }
 
     // Constructeur par défaut
     public RobotChenilles() {
         super();
         this.vitesse = new Vitesse(60, 30, 0, 0, 60);
-        this.reservoir = new Reservoir(2000, 3, 1100, 1);
+        this.reservoir = new Reservoir(2000, 3, 2000, 2);
     }
 
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
@@ -37,20 +37,14 @@ public class RobotChenilles extends Robots {
     }
 
     public void remplirReservoir(Carte carte) {
-        try {
-            if (carte.getVoisin(this.caseRobot, Direction.NORD).equalsTerrain("EAU")
-                    || carte.getVoisin(this.caseRobot, Direction.SUD).equalsTerrain("EAU")
-                    || carte.getVoisin(this.caseRobot, Direction.EST).equalsTerrain("EAU")
-                    || carte.getVoisin(this.caseRobot, Direction.OUEST).equalsTerrain("EAU")) {
-                this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
-                System.out.println("Remplissage réussi !");
+        for (Direction dir : Direction.values()) {
+            try {
+                if (carte.getVoisin(this.caseRobot, dir).equalsTerrain("EAU")) {
+                    this.reservoir.setVolumeCourant(this.reservoir.getCapaciteReservoir());
+                }
+            } catch (CaseOutOfMapException e) {
+                System.out.println("Warning : Verification effectuée en dehors en dehors de la carte !");
             }
-            else {
-                System.out.println("Le remplissage a échoué !");
-            }
-        } catch (CaseOutOfMapException e) {
-            System.out.println("Verification effectuée en dehors de la carte");
-            e.printStackTrace();
         }
     }
 

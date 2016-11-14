@@ -81,32 +81,23 @@ public class Robots {
         return 0;
     }
 
-    /*
-    public void deverserEau(int volume)  {
+
+    public void deverserEau(int volume) {
 
         if (this.reservoir.getVolumeCourant() < 1000000000) {
-            if (this.reservoir.getVolumeCourant() - volume >= 0) {
-                this.reservoir.setVolumeCourant(this.reservoir.getVolumeCourant() - volume);
-            }
-            else {
-                int volume2 = volume - this.reservoir.volumeCourant;
-                this.reservoir.setVolumeCourant(0);
-                System.out.println("Seulement " + volume2 + " d'eau a pu être versé.");
-            }
-        }
-        temps = ((volume % this.reservoir.getVolumeIntervention())/this.reservoir.getVolumeIntervention())*this.reservoir.getTempsIntervention();
-        temps += (volume / this.reservoir.getVolumeIntervention()) * this.reservoir.getTempsIntervention();
+                this.getReservoir().setVolumeCourant(0);
 
-        System.out.println("Temps pour verser eau : " + temps);
+        }
     }
-    */
 
     public void remplirReservoir(Carte carte){
         System.out.println("Ce robot n'a pas besoin de se remplir !");
     }
+
     public void creeGraphe(Carte carte) {
         System.out.println("Super-méthode creeGraphe");
     }
+
     @Override
     public String toString() {
         return "Robots{" +

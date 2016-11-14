@@ -47,7 +47,7 @@ public class Timeline {
             }
         }
         catch (IndexOutOfBoundsException a) {
-            System.out.println("Date inexistante");
+            System.out.println("Aucunes actions pour cette date !");
         }
     }
 

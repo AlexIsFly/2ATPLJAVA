@@ -14,7 +14,8 @@ public class RobotPattes extends Robots {
     // La vitesse n'est jamais spécifiée pour robot à pattes
     // Je considère le volume d'eau infini en le mettant très grand
     public RobotPattes(Case caseRobot) {
-        super(caseRobot, new Reservoir(1000000000, 0, 1200, 1), new Vitesse(30, 30, 0, 10, 30), "PATTES");
+        super(caseRobot, new Reservoir(1000000000, 0, 300, 1), new Vitesse(30, 30, 0, 10, 30), "PATTES");
+        this.reservoir.setVolumeCourant(1000000000);
     }
 
     // Constructeur par défaut
@@ -117,63 +118,4 @@ public class RobotPattes extends Robots {
         }
     }
 
-    /*
-    public ArrayList<int[]> getCoordvoisins(int []coord, Carte carte) {
-
-        // Pattes peut se déplacer sur tous sauf EAU
-
-        ArrayList<int[]> al = new ArrayList<int[]>();
-
-        int[] voisinNord = new int[3];
-        int[] voisinSud = new int[3];
-        int[] voisinOuest = new int[3];
-        int[] voisinEst = new int[3];
-
-        // Si on n'est pas sur le bord haut
-        if (coord[0] != 0) {
-            voisinNord[0] = coord[0] - 1;
-            voisinNord[1] = coord[1];
-            if (carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("TERRAIN_LIBRE")
-                    || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("FORET")
-                    || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("HABITAT")
-                    || carte.getCase(voisinNord[0], voisinNord[1]).equalsTerrain("ROCHE")) {
-                al.add(voisinNord);
-            }
-        }
-        // Si on n'est pas sur le bord sud
-        if (coord[0] != carte.getNbLignes()-1) {
-            voisinSud[0] = coord[0] + 1;
-            voisinSud[1] = coord[1];
-            if (carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("TERRAIN_LIBRE")
-                    || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("FORET")
-                    || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("HABITAT")
-                    || carte.getCase(voisinSud[0], voisinSud[1]).equalsTerrain("ROCHE")) {
-                al.add(voisinSud);
-            }
-        }
-        // Si on n'est pas sur le bord droit
-        if (coord[1] != carte.getNbColonnes()-1) {
-            voisinEst[0] = coord[0];
-            voisinEst[1] = coord[1] + 1;
-            if (carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("TERRAIN_LIBRE")
-                    || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("FORET")
-                    || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("HABITAT")
-                    || carte.getCase(voisinEst[0], voisinEst[1]).equalsTerrain("ROCHE")) {
-                al.add(voisinEst);
-            }
-        }
-        // Si on n'est pas sur le bord gauche
-        if (coord[1] != 0) {
-            voisinOuest[0] = coord[0];
-            voisinOuest[1] = coord[1] - 1;
-            if (carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("TERRAIN_LIBRE")
-                    || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("FORET")
-                    || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("HABITAT")
-                    || carte.getCase(voisinOuest[0], voisinOuest[1]).equalsTerrain("ROCHE")) {
-                al.add(voisinOuest);
-            }
-        }
-        return al;
-    }
-    */
 }

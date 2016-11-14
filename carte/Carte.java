@@ -4,6 +4,8 @@ import enumdata.Direction;
 import enumdata.NatureTerrain;
 import exceptions.CaseOutOfMapException;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by alexisgacel on 21/10/2016.
  * For Project Java ISSC - IMAG 2016
@@ -39,6 +41,37 @@ public class Carte {
 
     public int getNbColonnes() {
         return nbColonnes;
+    }
+
+    public Case getRandomWaterCase() {
+        int ligrnd, colrnd;
+        do {
+            ligrnd = ThreadLocalRandom.current().nextInt(0, nbLignes);
+            colrnd = ThreadLocalRandom.current().nextInt(0, nbColonnes);
+        } while (!getCase(ligrnd,colrnd).equalsTerrain("EAU"));
+        return getCase(ligrnd, colrnd);
+    }
+
+    public Case getRandomCoastCase() {
+        int ligrnd, colrnd;
+        Case casernd;
+        boolean found = false;
+        do {
+            ligrnd = ThreadLocalRandom.current().nextInt(0, nbLignes);
+            colrnd = ThreadLocalRandom.current().nextInt(0, nbColonnes);
+            casernd = getCase(ligrnd,colrnd);
+            if (!casernd.equalsTerrain("EAU")) {
+                for (Direction dir : Direction.values()) {
+                    try {
+                        if (getVoisin(casernd,dir).equalsTerrain("EAU")) {
+                            found = true;
+                        }
+                    } catch (CaseOutOfMapException e) {
+                    }
+                }
+            }
+        } while (!found);
+        return casernd;
     }
 
     private boolean voisinExiste(Case depart, Direction dir) {
@@ -92,10 +125,6 @@ public class Carte {
                 else throw new CaseOutOfMapException("Case Interdite");
         }
         return depart;
-    }
-
-    public boolean existeIncendie (int lig, int col) {
-        return this.map[lig][col].isIncendie();
     }
 
     public void setIncendie(int lig, int col, int intensite) {

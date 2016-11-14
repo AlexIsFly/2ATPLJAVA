@@ -12,9 +12,10 @@ public class EvenementRemplir extends Evenement {
 	}
 
 	public void execute(Carte carte) {
-        r.setIdle(false);
 		r.remplirReservoir(carte);
-	}
+        r.setIdle(true);
+        System.out.println(toString() + "FAIT !");
+    }
 
     @Override
     public String toString() {

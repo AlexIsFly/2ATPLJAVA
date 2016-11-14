@@ -57,7 +57,6 @@ public class LecteurDonnees {
         //construction de l'instance de DonneesSimulation
         DonneesSimulation datasim = new DonneesSimulation(map, robotL);
         scanner.close();
-        System.out.println("\n == Lecture terminee");
         return (datasim);
     }
 
@@ -88,8 +87,6 @@ public class LecteurDonnees {
             int nbLignes = scanner.nextInt();
             int nbColonnes = scanner.nextInt();
             int tailleCases = scanner.nextInt();	// en m
-            System.out.println("Carte " + nbLignes + "x" + nbColonnes
-                    + "; taille des cases = " + tailleCases);
             //carte object initialization
             Carte map = new Carte(nbLignes, nbColonnes, tailleCases);
 
@@ -117,7 +114,6 @@ public class LecteurDonnees {
      */
     private void lireCase(int lig, int col, Carte map) throws DataFormatException {
         ignorerCommentaires();
-        System.out.print("Case (" + lig + "," + col + "): ");
         String chaineNature;
         NatureTerrain nature;
 
@@ -129,14 +125,12 @@ public class LecteurDonnees {
             nature = NatureTerrain.valueOf(chaineNature);
             verifieLigneTerminee();
 
-            System.out.print("nature = " + chaineNature);
             map.fillCase(lig,col,nature);
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format de case invalide. "
                     + "Attendu: nature altitude [valeur_specifique]");
         }
-        System.out.println();
     }
 
 
@@ -147,7 +141,6 @@ public class LecteurDonnees {
         ignorerCommentaires();
         try {
             int nbIncendies = scanner.nextInt();
-            System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
                 lireIncendie(i, map);
             }
@@ -165,7 +158,6 @@ public class LecteurDonnees {
      */
     private void lireIncendie(int i, Carte map) throws DataFormatException {
         ignorerCommentaires();
-        System.out.print("Incendie " + i + ": ");
 
         try {
             int lig = scanner.nextInt();
@@ -177,9 +169,6 @@ public class LecteurDonnees {
             }
             verifieLigneTerminee();
             map.setIncendie(lig,col,intensite);
-
-            System.out.println("position = (" + lig + "," + col
-                    + ");\t intensite = " + intensite);
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format d'incendie invalide. "
@@ -198,7 +187,6 @@ public class LecteurDonnees {
         try {
             int nbRobots = scanner.nextInt();
             robotL = new Robots[nbRobots];
-            System.out.println("Nb de robots = " + nbRobots);
             for (int i = 0; i < nbRobots; i++) {
                 lireRobot(i, robotL, map);
             }
@@ -223,18 +211,14 @@ public class LecteurDonnees {
         try {
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
-            System.out.print("position = (" + lig + "," + col + ");");
             String type = scanner.next();
-            System.out.print("\t type = " + type);
 
 
             // lecture eventuelle d'une vitesse du robot (entier)
-            System.out.print("; \t vitesse = ");
             String s = scanner.findInLine("(\\d+)");	// 1 or more digit(s) ?
             // pour lire un flottant:    ("(\\d+(\\.\\d+)?)");
 
             if (s == null) {
-                System.out.print("valeur par defaut");
                 switch (type) {
                     case("DRONE"):
                         robotL[i] = new Drone(map.getCase(lig,col));
@@ -259,18 +243,15 @@ public class LecteurDonnees {
                         robotL[i] = new RobotRoues(map.getCase(lig, col));
                         break;
                     case ("PATTES"):
-                        System.out.println("Erreur, toujours vitesse par défaut, mauvais switch");
                         break;
                     case ("CHENILLES"):
                         robotL[i] = new RobotChenilles(map.getCase(lig, col), vitesse);
                         break;
                 }
 
-                System.out.print(vitesse);
             }
             verifieLigneTerminee();
 
-            System.out.println();
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format de robot invalide. "

@@ -19,16 +19,19 @@ public class EvenementIntervention extends Evenement {
 		int Qte;
 		Case pos = this.r.getPosition();
 		if (pos.isIncendie()) {
-			Qte = min(this.r.getReservoir().getVolumeCourant() , pos.getQteEau());  // la quantité que l'on va verser est le min entre ce que l'on peut verser et ce que l'on doit verser
-			//this.r.deverserEau(Qte);
+			Qte = min(this.r.getReservoir().getVolumeIntervention() , pos.getQteEau());
+			this.r.deverserEau(Qte);
 			pos.setQteEau(pos.getQteEau()-Qte);
-			System.out.println(" Le robot a déversé "+ Qte +" volume d'eau ");
-            System.out.println("L'incendie est d'intensité : "+pos.getQteEau());
+			System.out.println("Sur la " + r.getPosition().toString());
+			System.out.println("Le " + r.toString() + " a déversé "+ Qte +" volume d'eau ");
+            System.out.println("L'incendie est d'intensité : "+ pos.getQteEau());
         }
 		else
 		{
-            System.out.println("Pas de feu adjacent à " + this.r.getPosition().toString());
+            System.out.println("Pas de feu sur" + r.getPosition().toString() + " !");
         }
+        r.getPosition().setIncendieAffected(false);
+		r.setIdle(true);
 	}
 
 	@Override

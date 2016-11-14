@@ -12,11 +12,5 @@ import java.util.Scanner;
 public class TestSimulateur {
     public static void main(String[] args) {
         Simulateur sim = new Simulateur(args);
-
-        sim.demandeUtilisateur();
-
-        //la methode getaRobot permet d'obtenir un robot dans la liste des robots
-        //sim.addEventDirection(1,sim.getaRobot(0),Direction.NORD);
-        //sim.addEventTermine(1,sim.getaRobot(0));
     }
 }

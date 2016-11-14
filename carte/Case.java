@@ -97,7 +97,8 @@ public class Case {
     @Override
     public String toString() {
         return "Case{" +
-                "terrain=" + terrain +
+                "coord=" + "(" + getCoord()[0] + ", " + getCoord()[1] + ")" +
+                ", terrain=" + terrain +
                 ", incendie=" + incendie +
                 ", intensité=" + qteEau +
                 '}';
