@@ -171,10 +171,10 @@ public class Simulateur implements Simulable {
 
             int[] posCourante = rbt.getPosition().getCoord();
             int[] posFinale = {lig,col};
-            LinkedList<int[]> tabChemin = new LinkedList<>();
+            LinkedList<int[]> tabChemin;
             rbt.setIdle(false);
 
-
+            /*
             int [] step = {4,3};
             tabChemin.addFirst(step);
             int [] step2 = {5,3};
@@ -187,20 +187,27 @@ public class Simulateur implements Simulable {
             tabChemin.addLast(step5);
             int []  step6 = {7,1};
             tabChemin.addLast(step6);
-
+            */
 
             int pseudodate = currentdate;
-            //Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
+            Chemin c = new Chemin( posCourante, posFinale, rbt.getGraphe());
             System.out.println("Chemin Done");
-            //tabChemin=c.plusCourtChemin();
+            tabChemin=c.plusCourtChemin();
             System.out.println("PCC done");
             ListIterator li = tabChemin.listIterator();
 
             int[] prevcoord = posCourante;
             int[] suivcoord;
+
+            while (li.hasNext()) {
+                suivcoord = (int[]) li.next();
+                System.out.println("BEFORE : Le chemin emprunté sera : ");
+                System.out.println("ligne : " + suivcoord[0] + " | colonne : " + suivcoord[1]);
+            }
+
             while (li.hasNext()){
                 suivcoord = (int [])li.next();
-                System.out.println("Le chemin emprunté sera : ");
+                System.out.println("AFTER : Le chemin emprunté sera : ");
                 System.out.println("ligne : "+ suivcoord[0] + " | colonne : " + suivcoord[1]);
                 //on regarde si on doit se déplacer verticalement
                 System.out.println("valeur : " + (suivcoord[0] - prevcoord[0]));
@@ -224,17 +231,17 @@ public class Simulateur implements Simulable {
                             case 0:
                                 System.out.println("ERREUR planification déplacement");
                                 rbt.setIdle(true);
-                                return;
+                               // return;
                             default:
                                 System.out.println("ERREUR planification déplacement");
                                 rbt.setIdle(true);
-                                return;
+                               // return;
                         }
                         break;
                     default:
                         System.out.println("ERREUR planification déplacement");
                         rbt.setIdle(true);
-                        return;
+                        //return;
                 }
                 prevcoord = suivcoord;
                 pseudodate++;

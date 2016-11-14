@@ -3,6 +3,7 @@ package carte;
 import carte.Case;
 import enumdata.NatureTerrain;
 import robot.Robots;
+import sun.awt.AWTAccessor;
 import sun.awt.image.ImageWatched;
 
 import java.util.Iterator;
@@ -26,6 +27,7 @@ public class Chemin {
         this.nbLignes = nbLignes;
         this.nbColonnes = nbColonnes;
         this.tab_poids = new int[nbLignes][nbColonnes][2];
+        System.out.println("Le chemine est bien initialisé");
         this.tab_antecedents = new int[nbLignes][nbColonnes][2];
 
         // Initialisation du tableau antécédents
@@ -54,10 +56,10 @@ public class Chemin {
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 if (this.coordCaseDepart[0] == i && this.coordCaseDepart[1] == j) {
-                    this.tab_poids[i][j][1] = 0;
+                    this.tab_poids[i][j][0] = 0;
                 }
                 else {
-                    this.tab_poids[i][j][1] = 100000000;
+                    this.tab_poids[i][j][0] = 100000000;
                 }
             }
         }
@@ -75,18 +77,31 @@ public class Chemin {
 
         // Recherche du noeud de poids le + faible non marqué
         // Si ce noeud est la case d'arrivée, on arrête l'algo
+
+        System.out.println("Le tableau est bien initialisé" + nbLignes + nbColonnes);
         boolean done = false;
+
         while (done == false) {
+            caseCour[2] = 10000000;
             for (int i = 0; i < nbLignes; i++) {
                 for (int j = 0; j < nbColonnes; j++) {
+                    // Si la case n'est pas marquée
+                    System.out.println("Le tableau est bien initialisé" + nbLignes + nbColonnes);
+                    System.out.println("Le tableau est bien initialisé" + this.tab_poids[i][j][0]);
                     if (this.tab_poids[i][j][1] == 0 && caseCour[2] > this.tab_poids[i][j][0]) {
                         caseCour[2] = this.tab_poids[i][j][0];
                         caseCour[0] = i;
                         caseCour[1] = j;
+                        System.out.println("On choisit : " + caseCour[0] + caseCour[1]);
                     }
                 }
             }
-            if (caseCour[0] != this.coordCaseArrivee[0] && caseCour[1] != this.coordCaseArrivee[1]) {
+            System.out.println("caseCourante " + caseCour[0] + " " + caseCour[1] + this.coordCaseArrivee[0] + this.coordCaseArrivee[1]);
+            if (caseCour[0] == this.coordCaseArrivee[0] && caseCour[1] == this.coordCaseArrivee[1]){
+                System.out.println("DONE");
+                done = true;
+            }
+            else {
                 // On a trouvé la case non marquée avec le poids minimal (caseCour), on regarde ses fils et on met à jour le poids
                 Iterator itr = this.graphe.get(caseCour[0]).get(caseCour[1]).iterator();
                 while (itr.hasNext()) {
@@ -94,7 +109,7 @@ public class Chemin {
                     int[] liaisonFils = new int[3];
                     liaisonFils = (int[]) itr.next();
                     // On regarde si le fils n'est pas marqué, on met à jour son poids
-                    if (tab_antecedents[liaisonFils[0]][liaisonFils[1]][1] == 0) {
+                    if (tab_poids[liaisonFils[0]][liaisonFils[1]][1] == 0) {
                         // Si poids père + poids liaison père-fils < poids fils
                         // Alors Poids fils = poids père + poids liaison père-fils
                         if (tab_poids[caseCour[0]][caseCour[1]][0] + liaisonFils[2] < tab_poids[liaisonFils[0]][liaisonFils[1]][0]) {
@@ -104,38 +119,41 @@ public class Chemin {
                         tab_antecedents[liaisonFils[0]][liaisonFils[1]][0] = caseCour[0];
                         tab_antecedents[liaisonFils[0]][liaisonFils[1]][1] = caseCour[1];
                     }
-                    itr.next();
+                    System.out.println("Fils");
                 }
                 // On marque la case
+                System.out.println("OK : " + this.tab_poids[caseCour[0]][caseCour[1]][1]);
                 this.tab_poids[caseCour[0]][caseCour[1]][1] = 1;
-            }
-            else {
-                done = true;
             }
         }
 
     }
 
     public LinkedList<int[]> plusCourtChemin() {
+        System.out.println("plusCourtChemin");
         // Retourne le plus court chemin calculé par Djikstra
         this.algorithme(); // Met à jour le tableau antécédents
         LinkedList<int[]> chemin = new LinkedList<int[]>();
         int[] coordCourante = new int[2];
         int tempLigne;
         int tempColonne;
-        coordCourante[0] = this.coordCaseDepart[0];
-        coordCourante[1] = this.coordCaseDepart[1];
+        coordCourante[0] = this.coordCaseArrivee[0];
+        coordCourante[1] = this.coordCaseArrivee[1];
         chemin.add(coordCaseArrivee);
+        System.out.println("plusCourtChemin après addChemin");
         // Tant que les coordonnées de la case de départ ne sont pas atteintes ou que le père de la case courante n'existe pas
         while ((this.coordCaseDepart[0] != coordCourante[0] && this.coordCaseDepart[1] != coordCourante[1])) {
             if (tab_antecedents[coordCourante[0]][coordCourante[1]][0] == -1) {
                 System.out.println("Le chemin n'existe pas !");
                 return null;
             }
-            tempLigne = tab_antecedents[coordCourante[0]][coordCourante[1]][0];
-            tempColonne = tab_antecedents[coordCourante[0]][coordCourante[1]][1];
-            coordCourante[0] = tempLigne;
-            coordCourante[1] = tempColonne;
+            System.out.println("while plusCourtChemin");
+            System.out.println("CoordCourante : " + coordCourante[0] + coordCourante[1] + " Tab_antecedents : "
+                    + tab_antecedents[coordCourante[0]][coordCourante[1]][0]
+                    + tab_antecedents[coordCourante[0]][coordCourante[1]][1]);
+            coordCourante[0] = tab_antecedents[coordCourante[0]][coordCourante[1]][0];
+            coordCourante[1] = tab_antecedents[coordCourante[0]][coordCourante[1]][1];
+            System.out.println("Ce qu'on ajoute dans chemin " + coordCourante[0] + " " + coordCourante[1]);
             chemin.addFirst(coordCourante);
         }
         return chemin;
