@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Created by alexisgacel on 08/11/2016.
+ * Created by Riffard - Gacel - Dorr
  * For Project Java ISSC - IMAG 2016
  */
 public class CaseOutOfMapException extends Exception{

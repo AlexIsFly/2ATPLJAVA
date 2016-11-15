@@ -3,19 +3,25 @@ package carte;
 import enumdata.Direction;
 import enumdata.NatureTerrain;
 import exceptions.CaseOutOfMapException;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by alexisgacel on 21/10/2016.
+ * Created by Riffard - Gacel - Dorr
  * For Project Java ISSC - IMAG 2016
  */
+
 public class Carte {
     private Case[][] map;
     private int tailleCases;
     private int nbLignes;
     private int nbColonnes;
 
+    /**
+     * Constructor
+     * @param nbLignes
+     * @param nbColonnes
+     * @param tailleCases (not used here)
+     */
     public Carte(int nbLignes, int nbColonnes, int tailleCases) {
         this.tailleCases = tailleCases;
         this.nbLignes = nbLignes;
@@ -23,14 +29,15 @@ public class Carte {
         this.map = new Case[nbLignes][nbColonnes];
     }
 
-    public Case[][] getMap() {
-        return map;
+    //default constructor
+    public Carte() {
+        this.map = null;
+        this.tailleCases = 0;
+        this.nbLignes = 0;
+        this.nbColonnes = 0;
     }
 
-    public Case getCase(int lig, int col) {
-        return this.map[lig][col];
-    }
-
+    //getters
     public int getTailleCases() {
         return tailleCases;
     }
@@ -41,6 +48,19 @@ public class Carte {
 
     public int getNbColonnes() {
         return nbColonnes;
+    }
+
+    public Case[][] getMap() {
+        return map;
+    }
+
+    /**
+     * @param lig
+     * @param col
+     * @return the case corresponding to the given coordinates
+     */
+    public Case getCase(int lig, int col) {
+        return this.map[lig][col];
     }
 
     public Case getRandomWaterCase() {
@@ -67,6 +87,7 @@ public class Carte {
                             found = true;
                         }
                     } catch (CaseOutOfMapException e) {
+                        System.out.println("Case RND en dehors de la carte !");
                     }
                 }
             }
@@ -101,6 +122,12 @@ public class Carte {
         return existe;
     }
 
+    /**
+     * @param depart
+     * @param dir
+     * @return The case next to depart form the direction dir
+     * @throws CaseOutOfMapException
+     */
     public Case getVoisin(Case depart, Direction dir) throws CaseOutOfMapException {
         switch (dir){
             case NORD:
@@ -127,7 +154,8 @@ public class Carte {
         return depart;
     }
 
-    public void setIncendie(int lig, int col, int intensite) {
+    //these 2 methods are used in LecteurDonnées to create the map
+    public void setIncendieCase(int lig, int col, int intensite) {
         this.map[lig][col].setIncendie(true);
         this.map[lig][col].setQteEau(intensite);
     }
@@ -136,10 +164,14 @@ public class Carte {
         this.map[ligne][colonne] = new Case(ligne, colonne, terrain);
     }
 
+    //these 2 methods are only used for testing purposes
     private void printCaseTerrain(int lig, int col) {
         System.out.print(this.map[lig][col].getTerrain());
     }
 
+    /**
+     * Print an ASCII map to the standard output.
+     */
     public void printMap() {
         for (int lig = 0; lig < this.nbLignes; lig++) {
             for (int col = 0; col < this.nbColonnes; col++) {

@@ -3,17 +3,17 @@ package evenement;
 import carte.Carte;
 
 /**
- * Created by alexisgacel on 30/10/2016.
+ * Created by Riffard - Gacel - Dorr
  * For Project Java ISSC - IMAG 2016
  */
 abstract public class Evenement {
-    protected int date;
+    private int date;
 
-    public Evenement(int date) {
+    Evenement(int date) {
         this.date = date;
     }
 
-    public Evenement() {
+    Evenement() {
         this.date = 0;
     }
 
@@ -21,11 +21,11 @@ abstract public class Evenement {
         return date;
     }
 
-    public void setDate(int date) {
-        this.date = date;
-    }
-
-    public void execute(Carte carte){};
+    /**
+     * This method execute the relevant instructions for this event
+     * @param carte To check adjacent Case
+     */
+    public void execute(Carte carte){}
 
     @Override
     public String toString() {

@@ -6,33 +6,40 @@ import exceptions.CaseOutOfMapException;
 import robot.Robots;
 
 /**
- * Created by alexisgacel on 30/10/2016.
+ * Created by Riffard - Gacel - Dorr
  * For Project Java ISSC - IMAG 2016
  */
 public class EvenementMoveDir extends Evenement {
     private Direction dir;
     private Robots rbt;
 
+    /**
+     * Constructor for the EvenementMoveDir
+     * @param date Date the event has to execute
+     * @param rbt The robot to perform the event
+     * @param dir The direction the robot has to move
+     */
     public EvenementMoveDir(int date, Robots rbt, Direction dir) {
         super(date);
         this.dir = dir;
         this.rbt = rbt;
     }
 
+    @Override
     public void execute(Carte map){
         try {
             switch (dir) {
                 case NORD:
-                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.NORD));
+                    this.rbt.setCaseRobot(map.getVoisin(this.rbt.getCaseRobot(), Direction.NORD));
                     break;
                 case SUD:
-                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.SUD));
+                    this.rbt.setCaseRobot(map.getVoisin(this.rbt.getCaseRobot(), Direction.SUD));
                     break;
                 case EST:
-                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.EST));
+                    this.rbt.setCaseRobot(map.getVoisin(this.rbt.getCaseRobot(), Direction.EST));
                     break;
                 case OUEST:
-                    this.rbt.setPosition(map.getVoisin(this.rbt.getPosition(), Direction.OUEST));
+                    this.rbt.setCaseRobot(map.getVoisin(this.rbt.getCaseRobot(), Direction.OUEST));
                     break;
             }
             System.out.println(toString() + "FAIT !");
@@ -42,6 +49,9 @@ public class EvenementMoveDir extends Evenement {
         }
     }
 
+    /**
+     * @return Formatted string description of this event
+     */
     @Override
     public String toString() {
         return "EvenementMoveDir{" +

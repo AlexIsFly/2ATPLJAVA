@@ -1,11 +1,5 @@
 package carte;
 
-import carte.Case;
-import enumdata.NatureTerrain;
-import robot.Robots;
-import sun.awt.AWTAccessor;
-import sun.awt.image.ImageWatched;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -18,6 +12,12 @@ public class Chemin {
     private int[][][] tab_poids;
     private int[][][] tab_antecedents;
 
+    /**
+     * Constructor of Chemin
+     * @param coordCaseDepart
+     * @param coordCaseArrivee
+     * @param graphe
+     */
     public Chemin(int[] coordCaseDepart, int[] coordCaseArrivee, LinkedList<LinkedList<LinkedList<int[]>>> graphe) {
         this.coordCaseDepart = coordCaseDepart;
         this.coordCaseArrivee = coordCaseArrivee;
@@ -49,7 +49,7 @@ public class Chemin {
         this.tab_antecedents = new int[0][0][2];
     }
 
-    private void algorithme() {
+    private void applyDjisktra() {
         // Initialisation
         // On met la valeur du poids de la case de départ à 0 et tous les autres très grandes
         for (int i = 0; i < nbLignes; i++) {
@@ -63,7 +63,7 @@ public class Chemin {
             }
         }
 
-        // On applique maintenant l'algorithme
+        // On applique maintenant l'applyDjisktra
         // On recherche le noeud de poids le + faible non marqué
         // Si ce noeud est la case d'arrivée on a trouvé le chemin !
         // Sinon on regarde les fils et on met à jour leur poids
@@ -77,7 +77,7 @@ public class Chemin {
         // Recherche du noeud de poids le + faible non marqué
         // Si ce noeud est la case d'arrivée, on arrête l'algo
         boolean done = false;
-        while (done == false) {
+        while (!done) {
             caseCour[2] = 10000000;
             for (int i = 0; i < nbLignes; i++) {
                 for (int j = 0; j < nbColonnes; j++) {
@@ -118,9 +118,13 @@ public class Chemin {
 
     }
 
+    /**
+     * Calculate the shortest path between the two cases specified by chemin instance
+     * @return a list of coordinates corresponding to the shortest path
+     */
     public LinkedList<int[]> plusCourtChemin() {
         // Retourne le plus court chemin calculé par Djikstra
-        this.algorithme(); // Met à jour le tableau antécédents
+        this.applyDjisktra(); // Met à jour le tableau antécédents
         LinkedList<int[]> chemin = new LinkedList<int[]>();
         int[] coordCourante = new int[2];
         int tempLigne;
@@ -146,9 +150,15 @@ public class Chemin {
         return chemin;
     }
 
-    public int tempsDeplacement(LinkedList<int[]> chemin) {
+
+    /**
+     * method no used at this time
+     * @param path the list of coordinates of the shortest path
+     * @return the time in seconds for the path
+     */
+    public int tempsDeplacement(LinkedList<int[]> path) {
         // Le temps de déplacement est le poids du sommet de départ dans le chemin
-        return chemin.getFirst()[2];
+        return path.getFirst()[2];
     }
 
 }

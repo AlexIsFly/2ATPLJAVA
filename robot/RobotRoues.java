@@ -7,35 +7,70 @@ import exceptions.CaseOutOfMapException;
 
 import java.util.LinkedList;
 
+import static java.lang.Math.min;
+
 /**
- * Created by Nicolas on 05/11/2016.
+ * Created by Riffard - Gacel - Dorr
+ * For Project Java ISSC - IMAG 2016
  */
 public class RobotRoues extends Robots {
 
     private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;
 
-
-    // Quand la vitesse est spécifiée dans le fichier
+    /**
+     * Constructor of RobotRoues when a different speed is specified
+     * @param caseRobot the starting Case
+     * @param vitesseTerrainLibre the special speed
+     */
     public RobotRoues (Case caseRobot, Reservoir reservoir, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(5000, 5, 5000, 3), new Vitesse(vitesseTerrainLibre, 0, 0, 0, vitesseTerrainLibre), "ROUES");
+        super(caseRobot, new Reservoir(5000, 5, 5000, 3), new Vitesse(vitesseTerrainLibre, 0, 0, vitesseTerrainLibre), "ROUES");
     }
 
-    // Quand la vitesse n'est pas spécifiée
+    /**
+     * Constructor of RobotsRoues whith default speed
+     * @param caseRobot the starting Case
+     */
     public RobotRoues(Case caseRobot) {
-        super(caseRobot, new Reservoir(5000, 5, 5000, 3), new Vitesse(80, 0, 0, 0, 80), "ROUES");
+        super(caseRobot, new Reservoir(5000, 5, 5000, 3), new Vitesse(80, 0, 0, 80), "ROUES");
     }
 
-    // Constructeur par défaut
+    // Constructor by default
     public RobotRoues() {
         super();
-        this.vitesse = new Vitesse(80, 0, 0, 0, 80);
-        this.reservoir = new Reservoir(5000, 5, 2500, 1);
     }
 
+    @Override
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return this.graphe;
+        return graphe;
     }
 
+    /**
+     * Command the robot to unload the water
+     * The robot must be on a Case with Incendie
+     */
+    @Override
+    public void deverserEau() {
+        int Qte;
+        if (caseRobot.isIncendie()) {
+            Qte = min(this.reservoir.getVolumeCourant() , caseRobot.getQteEau());
+            caseRobot.setQteEau(caseRobot.getQteEau()-Qte);
+            this.getReservoir().setVolumeCourant(0);
+            System.out.println("Intervention réussie sur la " + caseRobot.toString());
+
+        }
+        else
+        {
+            System.out.println("Pas de feu sur la " + caseRobot.toString() + " !");
+        }
+    }
+
+
+    /**
+     * Command the robot to load the water
+     * This robot must be next to the water
+     * @param carte
+     */
+    @Override
     public void remplirReservoir(Carte carte) {
         for (Direction dir : Direction.values()) {
             try {
@@ -48,6 +83,12 @@ public class RobotRoues extends Robots {
         }
     }
 
+    /**
+     * Create the graph with correct weight for this robot
+     * It is necessary to call this method before finding a shortest path
+     * @param carte
+     */
+    @Override
     public void creeGraphe(Carte carte) {
         graphe = new LinkedList<LinkedList<LinkedList<int[]>>>();
 

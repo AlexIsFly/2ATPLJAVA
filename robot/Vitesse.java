@@ -1,21 +1,30 @@
 package robot;
 
 /**
- * Created by Nicolas on 05/11/2016.
+ * Created by Riffard - Gacel - Dorr
+ * For Project Java ISSC - IMAG 2016
  */
 
 public class Vitesse {
 
-    protected double vitesseTerrainLibre;
-    protected double vitesseForet;
-    protected double vitesseEau;
-    protected double vitesseRoche;
-    protected double vitesseHabitat;
+    private double vitesseTerrainLibre;
+    private double vitesseForet;
+    private double vitesseEau;
+    private double vitesseRoche;
+    private double vitesseHabitat;
 
-    public Vitesse(double vitesseTerrainLibre, double vitesseForet, double vitesseEau, double vitesseRoche, double vitesseHabitat) {
+
+    /**
+     * This object contains the different speed of each robot
+     * @param vitesseTerrainLibre
+     * @param vitesseForet
+     * @param vitesseRoche
+     * @param vitesseHabitat
+     */
+    public Vitesse(double vitesseTerrainLibre, double vitesseForet, double vitesseRoche, double vitesseHabitat) {
         this.vitesseTerrainLibre = vitesseTerrainLibre;
         this.vitesseForet = vitesseForet;
-        this.vitesseEau = vitesseEau;
+        this.vitesseEau = (double) 0;
         this.vitesseRoche = vitesseRoche;
         this.vitesseHabitat = vitesseHabitat;
     }
@@ -56,31 +65,4 @@ public class Vitesse {
         return this.vitesseHabitat;
     }
 
-    public void setVitesseTerrainLibre(double vitesse) {
-        this.vitesseTerrainLibre = vitesseTerrainLibre;
-    }
-
-    public void setVitesseForet(double vitesseForet) {
-        this.vitesseForet = vitesseForet;
-    }
-
-    public void setVitesseEau(double vitesseEau) {
-        this.vitesseEau = vitesseEau;
-    }
-
-    public void setVitesseRoche(double vitesseRoche) {
-        this.vitesseRoche = vitesseRoche;
-    }
-
-    public void setVitesseHabitat(double vitesseHabitat) {
-        this.vitesseHabitat = vitesseHabitat;
-    }
-
-    public void setAllVitesses(double vitesse) {
-        this.vitesseEau = vitesse;
-        this.vitesseForet = vitesse;
-        this.vitesseRoche = vitesse;
-        this.vitesseHabitat = vitesse;
-        this.vitesseTerrainLibre = vitesse;
-    }
 }

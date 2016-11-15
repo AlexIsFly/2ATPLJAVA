@@ -1,17 +1,23 @@
 package robot;
 
 /**
- * Created by Nicolas on 05/11/2016.
+ * Created by Riffard - Gacel - Dorr
+ * For Project Java ISSC - IMAG 2016
  */
 public class Reservoir {
-    protected int capaciteReservoir;
-    // En secondes
-    protected int tempsRemplissage;
-    protected int volumeIntervention;
-    protected int tempsIntervention;
-    // Donne le volume d'eau qu'a le robot à l'instant t
-    protected int volumeCourant;
+    private int capaciteReservoir;
+    private int tempsRemplissage;
+    private int volumeIntervention;
+    private int tempsIntervention;
+    private int volumeCourant;
 
+    /**
+     * This object contains relevant information regarding water usage
+     * @param capaciteReservoir
+     * @param tempsRemplissage in number of turns (for this version)
+     * @param volumeIntervention
+     * @param tempsIntervention in number of turns (for this version)
+     */
     public Reservoir(int capaciteReservoir, int tempsRemplissage, int volumeIntervention, int tempsIntervention) {
         this.capaciteReservoir = capaciteReservoir;
         this.tempsRemplissage = tempsRemplissage;
@@ -32,32 +38,16 @@ public class Reservoir {
         return capaciteReservoir;
     }
 
-    public void setCapaciteReservoir(int capaciteReservoir) {
-        this.capaciteReservoir = capaciteReservoir;
-    }
-
     public int getTempsRemplissage() {
         return tempsRemplissage;
-    }
-
-    public void setTempsRemplissage(int tempsRemplissage) {
-        this.tempsRemplissage = tempsRemplissage;
     }
 
     public int getVolumeIntervention() {
         return volumeIntervention;
     }
 
-    public void setVolumeIntervention(int volumeIntervention) {
-        this.volumeIntervention = volumeIntervention;
-    }
-
     public int getTempsIntervention() {
         return tempsIntervention;
-    }
-
-    public void setTempsIntervention(int tempsIntervention) {
-        this.tempsIntervention = tempsIntervention;
     }
 
     public int getVolumeCourant() {

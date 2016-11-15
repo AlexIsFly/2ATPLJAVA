@@ -2,34 +2,65 @@ package robot;
 
 import carte.Carte;
 import carte.Case;
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 
+import static java.lang.Math.min;
+
 /**
- * Created by Nicolas on 05/11/2016.
+ * Created by Riffard - Gacel - Dorr
+ * For Project Java ISSC - IMAG 2016
  */
 public class RobotPattes extends Robots {
 
-    private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;;
-    // La vitesse n'est jamais spécifiée pour robot à pattes
-    // Je considère le volume d'eau infini en le mettant très grand
+    private static LinkedList<LinkedList<LinkedList<int[]>>> graphe;
+
+
+    /**
+     * Constructor of RobotPattes
+     * This robot has an infinite capacity
+     * @param caseRobot starting Case of the robot
+     */
     public RobotPattes(Case caseRobot) {
-        super(caseRobot, new Reservoir(1000000000, 0, 300, 1), new Vitesse(30, 30, 0, 10, 30), "PATTES");
+        super(caseRobot, new Reservoir(1000000000, 0, 2000, 10), new Vitesse(30, 30, 10, 30), "PATTES");
         this.reservoir.setVolumeCourant(1000000000);
     }
 
-    // Constructeur par défaut
+    //Constructeur by default
     public RobotPattes() {
         super();
-        this.vitesse = new Vitesse(30, 30, 0, 10, 30);
-        this.reservoir = new Reservoir(1000000000, 0, 1200, 1);
-        this.reservoir.setVolumeCourant(1000000000);
     }
 
+    @Override
     public LinkedList<LinkedList<LinkedList<int[]>>> getGraphe() {
-        return this.graphe;
+        return graphe;
     }
 
+
+    /**
+     * Command the robot to unload the water
+     * The robot must be on a Case with Incendie
+     */
+    @Override
+    public void deverserEau() {
+        int Qte;
+        if (caseRobot.isIncendie()) {
+            Qte = min(this.reservoir.getVolumeIntervention() , caseRobot.getQteEau());
+            caseRobot.setQteEau(caseRobot.getQteEau()-Qte);
+            System.out.println("Intervention réussie sur la " + caseRobot.toString());
+        }
+        else
+        {
+            System.out.println("Pas de feu sur la " + caseRobot.toString() + " !");
+        }
+    }
+
+    /**
+     * Create the graph with correct weight for this robot
+     * It is necessary to call this method before finding a shortest path
+     * @param carte
+     */
+    @Override
     public void creeGraphe(Carte carte) {
         graphe = new LinkedList<LinkedList<LinkedList<int[]>>>();
 

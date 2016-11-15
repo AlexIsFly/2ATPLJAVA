@@ -4,43 +4,20 @@ package io;
 import carte.Carte;
 import enumdata.NatureTerrain;
 import robot.*;
-
 import java.io.*;
 import java.util.*;
 import java.util.zip.DataFormatException;
 
 
 
-
-/**
- * Lecteur de cartes au format spectifié dans le sujet.
- * Les données sur les cases, robots puis incendies sont lues dans le fichier,
- * puis simplement affichées.
- * A noter: pas de vérification sémantique sur les valeurs numériques lues.
- *
- * IMPORTANT:
- *
- * Cette classe ne fait que LIRE les infos et les afficher.
- * A vous de modifier ou d'ajouter des méthodes, inspirées de celles présentes
- * (ou non), qui CREENT les objets au moment adéquat pour construire une
- * instance de la classe DonneesSimulation à partir d'un fichier.
- *
- * Vous pouvez par exemple ajouter une méthode qui crée et retourne un objet
- * contenant toutes les données lues:
- *    public static DonneesSimulation creeDonnees(String fichierDonnees);
- * Et faire des méthode creeCase(), creeRobot(), ... qui lisent les données,
- * créent les objets adéquats et les ajoutent ds l'instance de
- * DonneesSimulation.
- */
 public class LecteurDonnees {
 
 
     /**
-     * Lit et affiche le contenu d'un fichier de donnees (cases,
-     * robots et incendies).
-     * Ceci est méthode de classe; utilisation:
-     * LecteurDonnees.lire(fichierDonnees)
+     * Class method
+     * Reads and stores relevant data in an instance of DonneesSimulation
      * @param fichierDonnees nom du fichier à lire
+     * @return an instance of DonneesSimulation
      */
     public static DonneesSimulation lire(String fichierDonnees)
         throws FileNotFoundException, DataFormatException {
@@ -78,8 +55,9 @@ public class LecteurDonnees {
     }
 
     /**
-     * Lit et affiche les donnees de la carte.
+     * Read and create the map
      * @throws ExceptionFormatDonnees
+     * @return a map
      */
     private Carte lireCarte() throws DataFormatException {
         ignorerCommentaires();
@@ -110,7 +88,7 @@ public class LecteurDonnees {
 
 
     /**
-     * Lit et affiche les donnees d'une case.
+     * Read and create an instance of Case
      */
     private void lireCase(int lig, int col, Carte map) throws DataFormatException {
         ignorerCommentaires();
@@ -135,7 +113,7 @@ public class LecteurDonnees {
 
 
     /**
-     * Lit et affiche les donnees des incendies.
+     * Read and updates map with Incendie
      */
     private void lireIncendies(Carte map) throws DataFormatException {
         ignorerCommentaires();
@@ -153,8 +131,7 @@ public class LecteurDonnees {
 
 
     /**
-     * Lit et affiche les donnees du i-eme incendie.
-     * @param i
+     * Put Incendie to one Case of the map
      */
     private void lireIncendie(int i, Carte map) throws DataFormatException {
         ignorerCommentaires();
@@ -168,7 +145,7 @@ public class LecteurDonnees {
                         + "nb litres pour eteindre doit etre > 0");
             }
             verifieLigneTerminee();
-            map.setIncendie(lig,col,intensite);
+            map.setIncendieCase(lig,col,intensite);
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format d'incendie invalide. "
@@ -178,8 +155,7 @@ public class LecteurDonnees {
 
 
     /**
-     * Lit et affiche les donnees des robots.
-     * @param map
+     * Reads and creates the list of robots
      */
     private Robots[] lireRobots(Carte map) throws DataFormatException {
         ignorerCommentaires();
@@ -200,10 +176,7 @@ public class LecteurDonnees {
 
 
     /**
-     * Lit et affiche les donnees du i-eme robot.
-     * @param roboti
-     * @param i
-     * @param map
+     * Reads the information of a robot and appends it to the list
      */
     private void lireRobot(int i, Robots[] robotL, Carte map) throws DataFormatException {
         ignorerCommentaires();

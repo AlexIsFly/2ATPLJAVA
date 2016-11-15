@@ -3,7 +3,7 @@ package carte;
 import enumdata.NatureTerrain;
 
 /**
- * Created by alexisgacel on 23/10/2016.
+ * Created by Riffard - Gacel - Dorr
  * For Project Java ISSC - IMAG 2016
  */
 
@@ -15,6 +15,12 @@ public class Case {
     private boolean incendieAffected;
     private int qteEau;
 
+    /**
+     * Constructor for Case
+     * @param ligne
+     * @param colonne
+     * @param terrain
+     */
     Case(int ligne, int colonne, NatureTerrain terrain) {
         this.ligne = ligne;
         this.colonne = colonne;
@@ -33,27 +39,12 @@ public class Case {
         this.qteEau = 0;
     }
 
-    public boolean isIncendieAffected() {
-        return incendieAffected;
-    }
-
-    public void setIncendieAffected(boolean incendieAffected) {
-        this.incendieAffected = incendieAffected;
-    }
-
     public int getLigne() {
         return ligne;
     }
 
     public int getColonne() {
         return colonne;
-    }
-
-    public int[] getCoord() {
-        int[] coord = new int[2];
-        coord[0] = this.ligne;
-        coord[1] = this.colonne;
-        return coord;
     }
 
     public NatureTerrain getTerrain() {
@@ -64,6 +55,19 @@ public class Case {
         return incendie;
     }
 
+    public boolean isIncendieAffected() {
+        return incendieAffected;
+    }
+
+    public int getQteEau() {
+        return qteEau;
+    }
+
+
+    public void setIncendieAffected(boolean incendieAffected) {
+        this.incendieAffected = incendieAffected;
+    }
+
     void setIncendie(boolean incendie) {
         this.incendie = incendie;
     }
@@ -72,28 +76,25 @@ public class Case {
         this.qteEau = qteEau;
     }
 
-    public int getQteEau() {
-        return qteEau;
+    public int[] getCoord() {
+        int[] coord = new int[2];
+        coord[0] = this.ligne;
+        coord[1] = this.colonne;
+        return coord;
     }
 
-    //usage : case.equalsTerrain('EAU') renvoie true si case est de type EAU
-    //les types de terrain sont dans enumdata->NatureTerrain
+
+    /**
+     * @param str String corresponding of the terrain name
+     * @return True if the terrain is the one specified by str, false otherwise
+     */
     public boolean equalsTerrain(String str) {
         return (this.terrain == NatureTerrain.valueOf(str));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Case aCase = (Case) o;
-
-        if (ligne != aCase.ligne) return false;
-        return colonne == aCase.colonne;
-
-    }
-
+    /**
+     * @return formatted string description of a Case
+     */
     @Override
     public String toString() {
         return "Case{" +
