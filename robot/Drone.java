@@ -20,7 +20,7 @@ public class Drone extends Robots {
      * @param vitesseTerrainLibre the special speed
      */
     public Drone (Case caseRobot, double vitesseTerrainLibre) {
-        super(caseRobot, new Reservoir(100000, 15, 10000, 1), new Vitesse(vitesseTerrainLibre), "DRONE");
+        super(caseRobot, new Reservoir(10000, 15, 10000, 1), new Vitesse(vitesseTerrainLibre), "DRONE");
     }
 
     /**
@@ -28,7 +28,7 @@ public class Drone extends Robots {
      * @param caseRobot the starting Case
      */
     public Drone(Case caseRobot) {
-        super(caseRobot, new Reservoir(100000, 15, 10000, 1), new Vitesse(100), "DRONE");
+        super(caseRobot, new Reservoir(10000, 15, 10000, 1), new Vitesse(100), "DRONE");
     }
 
     // Constructeur by default

@@ -100,26 +100,14 @@ class Simulateur implements Simulable {
     public void restart() {
         this.currentdate = 0;
         fillSimulationData(argsBak);
-        setFireFalse();
         this.timeline = new Timeline(datasim);
         drawTerrain();
         drawRobots();
         drawText();
-        lanceChefRobot();
     }
 
     public int getDate(){
         return this.currentdate;
-    }
-
-    private void setFireFalse() {
-        for (Case caseL[] : datasim.getCarte().getMap()) {
-            for (Case casei : caseL) {
-                if (casei.isIncendie()) {
-                    casei.setIncendieAffected(false);
-                }
-            }
-        }
     }
 
     /**
@@ -252,7 +240,7 @@ class Simulateur implements Simulable {
                 if (casei.isIncendie()){
                     String number = "";
                     number = number + casei.getQteEau();
-                    gui.addGraphicalElement(new Text(casei.getColonne()*64+30,casei.getLigne()*64+40,Color.white, number));
+                    gui.addGraphicalElement(new Text(casei.getColonne()*64+30,casei.getLigne()*64+5,Color.white, number));
                 }
             }
         }
